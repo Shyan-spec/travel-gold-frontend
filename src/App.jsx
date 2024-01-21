@@ -1,31 +1,23 @@
-// src/App.jsx
-import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import './App.css';
+import "./App.css"
+import { Route, Routes } from "react-router-dom";
+import { Navbar } from "../src/components/Navbar";
+import { Login } from "./Login";
+import { Createaccount } from "./Createaccount";
+import { Home } from './Home'
 
-function App() {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
 
+function App () {
   return (
-    <div className='App'>
-      <h1>Type your desired location</h1>
-      <div className="search-container">
-        <input type="text" placeholder="Search..." />
-      </div>
-      <div className="calendar-container">
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          startDate={startDate}
-          endDate={endDate}
-          selectsRange
-          inline
-        />
-      </div>
-    </div>
-  )
+  <div className="App">
+    
+    <Navbar />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/createaccount" element={<Createaccount/>} />
+      <Route path="/login" element={<Login/>} />
+    </Routes>
+  </div>
+  );
 }
 
 export default App;
