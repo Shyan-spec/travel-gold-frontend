@@ -1,6 +1,7 @@
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import './GoogleMaps.css';
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useState } from "react";
+import axios from "axios";
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -13,12 +14,34 @@ const center = {
   lng: 74.0060,
 };
 
+async function fetchPlaceId(id) {
+
+  console.log(id)
+
+  // const place = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json
+  // ?place_id=${id}
+  // &key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`)
+
+  // return place
+}
+
+
 const GoogleMaps = () => {
   const autocompleteInputRef = useRef(null);
+  const [markerPosition, setMarkerPosition] = useState(null)
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
     libraries,
   });
+
+
+const handleMapMarker = (event) => {
+
+  setMarkerPosition({
+    lat: event.latLng.lat(),
+    lng: event.latLng.lng()
+  });
+}
 
   const initAutocomplete = useCallback((map) => {
     if (!autocompleteInputRef.current) return;
@@ -52,11 +75,17 @@ const GoogleMaps = () => {
       <input ref={autocompleteInputRef} type="text" placeholder="Where to?" />
       <div className='google-maps'>
         <GoogleMap
-           mapContainerStyle={ mapContainerStyle}
+           mapContainerStyle={mapContainerStyle}
           center={center}
           zoom={8}
           onLoad={initAutocomplete}
-        />
+          onClick={(e) => {
+            fetchPlaceId(e.placeId)
+            handleMapMarker(e)
+          }}
+          
+          
+        >{markerPosition && <Marker position={markerPosition} />}</GoogleMap>
     
        
       </div>
