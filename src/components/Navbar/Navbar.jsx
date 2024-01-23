@@ -14,7 +14,7 @@ export const Navbar = () => {
 
 
       <ul>
-        <li><NavLink to="/createaccount" className="active">Create Account</NavLink></li>
+        <li><NavLink to="/signup" className="active">Sign Up</NavLink></li>
         <li><NavLink to="/login" className="active">Login</NavLink></li>
       </ul>
     </nav>
