@@ -13,10 +13,9 @@ function getToken() {
     let token = localStorage.getItem('token')
     if (token) {
         const payload = jwtDecode(token)
-        console.log(payload)
         if (payload.exp < Date.now() / 1000) {
-        localStorage.removeItem('token')
-        token = null
+            localStorage.removeItem('token')
+            token = null
         }
     }
     return token

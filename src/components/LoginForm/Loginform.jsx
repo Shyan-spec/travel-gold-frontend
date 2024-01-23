@@ -7,7 +7,7 @@ const Loginform = (props) => {
     const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
-    pw: '',
+    password: '',
   })
 
   const handleChange = (e) => {
@@ -49,8 +49,8 @@ const Loginform = (props) => {
         type="password"
         autoComplete="off"
         id="password"
-        value={formData.pw}
-        name="pw"
+        value={formData.password}
+        name="password"
         onChange={handleChange}
       />
     </div>

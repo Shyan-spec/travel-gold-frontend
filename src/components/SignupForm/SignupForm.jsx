@@ -4,7 +4,7 @@ import './SignupForm.css'
 import * as  authService from '../../services/authService'
 
 export const SignupForm = (props) => {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
