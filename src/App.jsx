@@ -1,11 +1,11 @@
-import GoogleMaps from "./components/GoogleMaps";
+import GoogleMaps from "./components/GoogleMaps/GoogleMaps";
 
 
 const App = () => {
 
   return (
     <div>
-      <GoogleMaps/>
+     
         
     </div>
   );
