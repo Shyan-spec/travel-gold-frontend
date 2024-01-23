@@ -1,5 +1,5 @@
 import Loginform from '../../components/LoginForm/Loginform'
-import styles from './Login.css'
+import './Login.css'
 import { useState } from 'react'
 
 const Login = (props) => {
@@ -9,7 +9,7 @@ const Login = (props) => {
     setMessage(msg)
   }
   return (
-    <main className={styles.container}>
+    <main className="container">
       <h1>Log In</h1>
       <p>{message}</p>
       <Loginform

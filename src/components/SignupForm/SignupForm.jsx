@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import styles from './SignupForm.css'
-import authService from '../../services/authService'
+import './SignupForm.css'
+import * as  authService from '../../services/authService'
 
 export const SignupForm = (props) => {
     const navigate = useNavigate()
@@ -42,10 +42,10 @@ export const SignupForm = (props) => {
     <form
       autoComplete="off"
       onSubmit={handleSubmit}
-      className={styles.container}
+      className="container"
     >
-      <div className={styles.inputContainer}>
-        <label htmlFor="name" className={styles.label}>Name</label>
+      <div className="inputContainer">
+        <label htmlFor="name" className="label">Name</label>
         <input
           type="text"
           autoComplete="off"
@@ -55,8 +55,8 @@ export const SignupForm = (props) => {
           onChange={handleChange}
         />
       </div>
-      <div className={styles.inputContainer}>
-        <label htmlFor="email" className={styles.label}>Email</label>
+      <div className="inputContainer">
+        <label htmlFor="email" className="label">Email</label>
         <input
           type="text"
           autoComplete="off"
@@ -66,8 +66,8 @@ export const SignupForm = (props) => {
           onChange={handleChange}
         />
       </div>
-      <div className={styles.inputContainer}>
-        <label htmlFor="password" className={styles.label}>Password</label>
+      <div className="inputContainer">
+        <label htmlFor="password" className="label">Password</label>
         <input
           type="password"
           autoComplete="off"
@@ -77,8 +77,8 @@ export const SignupForm = (props) => {
           onChange={handleChange}
         />
       </div>
-      <div className={styles.inputContainer}>
-        <label htmlFor="confirm" className={styles.label}>
+      <div className="inputContainer">
+        <label htmlFor="confirm" className="label">
           Confirm Password
         </label>
         <input
@@ -90,8 +90,8 @@ export const SignupForm = (props) => {
           onChange={handleChange}
         />
       </div>
-      <div className={styles.inputContainer}>
-        <button disabled={isFormInvalid()} className={styles.button}>
+      <div className="inputContainer">
+        <button disabled={isFormInvalid()} className="button">
           Sign Up
         </button>
         <Link to="/">
