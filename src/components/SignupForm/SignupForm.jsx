@@ -95,9 +95,9 @@ export const SignupForm = (props) => {
         <button disabled={isFormInvalid()} className="button">
           Sign Up
         </button>
-        <Link to="/">
-          <button>Cancel</button>
-        </Link>
+        <Link to="/" className="cancelButton">
+  <button>Cancel</button>
+</Link>
       </div>
     </form>
   )

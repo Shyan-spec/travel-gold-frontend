@@ -1,0 +1,49 @@
+/* src/pages/SearchPage/SearchPage.css */
+
+/* Center the entire content of the SearchPage */
+/* div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+  } */
+  
+  /* Style for the search input and button */
+  input {
+    width: 700px; 
+    height: 70px; /* Set the desired height */
+    margin: 10px 0; /* Add margin to space out the input from other elements */
+    padding: 8px;
+   
+  }
+  
+  button {
+    padding: 8px 16px;
+  }
+  
+  
+  
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; 
+    height: 92vh;
+}
+
+.schedule {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .schedule > * {
+    flex: 1;
+    margin-right: 10px; /* Adjust margin as needed */
+  }
+  
+  .schedule input,
+  .schedule button {
+    width: 100%;
+  }

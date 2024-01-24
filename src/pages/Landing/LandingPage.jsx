@@ -1,45 +1,48 @@
-// Landing.jsx
-
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import BgVideo from '../../media/bg.mp4'; 
+import React, { useState } from 'react';
+import BgVideo from '../../media/bg.mp4';
 import './Landing.css';
+import Login from '../Login/Login'; // Import your Login component
+import Signup from '../Signup/Signup';
+
+const Landingpage = ({handleSignupOrLogin}) => {
+  const [show, setShow] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
 
 
-const Landingpage = () => {
+  const handleLoginClick = () => {
+    setShow(true);
+    setShowLogin(true)
+  };
+
+  const handleSignupClick = () => {
+    setShow(true);
+    setShowSignup(true)
+  };
+
   return (
-      <div className="landingpage">
-
-          <video src={BgVideo} autoPlay muted loop className="video-bg" />
-          <div className="bg-overlay"></div>
-
-              {/* Navbar links integrated into the landing page */}
-      <nav className="navbar">
-        {/* <NavLink to="/" className="title">Travel Gold</NavLink> */}
-        <div className="menu">
-          <span></span>
-          <span></span>
-          <span></span>
+    <div className="landingpage">
+      <video src={BgVideo} autoPlay muted loop className={`video-bg ${showLogin ? 'hide-bg' : ''}`} />
+      {show ? (
+        showLogin ? (<Login handleSignupOrLogin={handleSignupOrLogin} />) :
+        (<Signup handleSignupOrLogin={handleSignupOrLogin} />)
+      ) : (
+        <div className="bg-overlay">
+          <div className="home-text">
+            <h1>Travel Gold</h1>
+            <p>Live out your ideal vacation!</p>
+            <button onClick={handleLoginClick} className="login-btn">
+              Login
+            </button>
+            <button onClick={handleSignupClick} className="signup-btn">
+              Signup
+            </button>
+          </div>
         </div>
-
-        <ul>
-          {/* <li><NavLink to="/signup" className="active">Sign Up</NavLink></li>
-          <li><NavLink to="/login" className="active">Login</NavLink></li>
-          <li><NavLink to="/createitinerary" className="active">Create Itinerary</NavLink></li> */}
-        </ul>
-      </nav>
-
-      <div className="home-text">
-        <h1>Travel Gold</h1>
-        <p>Live out your ideal vacation!</p>
-      </div>
-
-      {/* Replace div elements with NavLink elements */}
-      <NavLink to="/login" className="home-btn">Login</NavLink>
-      <NavLink to="/signup" className="home-btn signup-btn">Sign Up</NavLink>
-      {/* <NavLink to="/createitinerary" className="home-btn">Create Itinerary</NavLink> */}
+      )}
     </div>
   );
-}
+  
+};
 
 export default Landingpage;

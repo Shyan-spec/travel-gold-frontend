@@ -18,7 +18,7 @@
     font-family: serif;
 }
 .video-bg {
-    width: 400%;
+    width: 100%;
     height: 100vh;
     position: absolute;
     top: 0;
@@ -28,13 +28,16 @@
 
 .bg-overlay {
     height: 80%;
-    width: 110%;
-    background-color: rgba(235, 233, 233, 0.5);
+    width: 30%;
+    background: rgba(255, 255, 255, 0.02);
     position: absolute;
-    top: 0;
     z-index: 0;
     top: 10%; 
-    
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-radius: 20px; 
+    backdrop-filter: blur(5px);
 }
 
 .navbar {
@@ -83,12 +86,13 @@
 }
 
 h1 {
-    font-size: 6em;
+    font-size: 5em;
     animation-name: fade;
     animation-duration: 4s;
     white-space: nowrap;
     color: black;
     font-style: italic;
+    
     
   
 }
@@ -98,9 +102,9 @@ p {
     font-size: 2em;
 }
 
-.home-btn {
+.login-btn {
     width: 8em;
-    height: 2.1em;
+    height: 1.9em;
     border: 2px solid white;
     border-radius: 0.25em;
     background-color: rgba(255, 255, 255, 0.457);
@@ -114,14 +118,29 @@ p {
     text-align: center; /* Center the text horizontally */
     /* margin: 3em 0 0.8em; */
     font-style: italic;
+    margin-top: 15%;
     
 }
 
+
 .signup-btn {
-    /* Add specific styles for the "Sign In" button */
-    color: black;
-    margin: 20%;
-  
+    width: 8em;
+    height: 1.9em;
+    border: 2px solid white;
+    border-radius: 0.25em;
+    background-color: rgba(255, 255, 255, 0.457);
+    z-index: 1;
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center; /* Center the text horizontally */
+    /* margin: 3em 0 0.8em; */
+    font-style: italic;
+    margin-top: 5%;
+    
 }
 
 
