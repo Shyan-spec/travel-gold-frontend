@@ -16,7 +16,7 @@ function handleSignupOrLogin() {
   }
 
   return (
-  <div className="App">
+  <div className='App'>
     <Navbar />
     <Routes>
       <Route path="/" element={<Landing />} />
@@ -24,7 +24,7 @@ function handleSignupOrLogin() {
       <Route path="/login" element={<Login handleSignupOrLogin={handleSignupOrLogin}/>} />
       <Route path="/itineraries" element={<CreateItinerary/>}/>
     </Routes>
-  </div>
+ </div>
   );
 }
 export default App;
