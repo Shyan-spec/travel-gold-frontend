@@ -1,5 +1,5 @@
 import Loginform from '../../components/LoginForm/Loginform'
-import './Login.css'
+import styles from './Login.module.css'
 import { useState } from 'react'
 
 const Login = (props) => {
@@ -11,8 +11,8 @@ const Login = (props) => {
 
   return (
     <main>
-      <h3 className="login-title">Login</h3>
-      <div className="login-message">{message}</div>
+      <h3 className={styles.loginTitle}>Login</h3>
+      <div className={styles.loginMessage}>{message}</div>
       <Loginform {...props} updateMessage={updateMessage} />
     </main>
   );

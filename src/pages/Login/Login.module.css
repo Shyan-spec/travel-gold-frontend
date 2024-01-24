@@ -1,32 +1,11 @@
-/* .login-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 90vh; 
-} */
 
-
-/* .login-container:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: inherit;
-  /* clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%); */
-  /* z-index: -1;
-  filter: blur(20px);
-} */ */
- 
-.login-title {
+.loginTitle {
   color: black;
   font-size: 2rem;
   margin-bottom: 20px;
 }
 
-.login-message {
+.loginMessage {
   color: #ff0033;
   margin-bottom: 20px;
 }

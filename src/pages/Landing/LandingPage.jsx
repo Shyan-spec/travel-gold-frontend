@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import BgVideo from '../../media/bg.mp4';
-import './Landing.css';
 import Login from '../Login/Login'; // Import your Login component
 import Signup from '../Signup/Signup';
+import styles from './Landing.module.css'
 
 const Landingpage = ({handleSignupOrLogin}) => {
   const [show, setShow] = useState(false);
@@ -21,20 +21,20 @@ const Landingpage = ({handleSignupOrLogin}) => {
   };
 
   return (
-    <div className="landingpage">
-      <video src={BgVideo} autoPlay muted loop className={`video-bg ${showLogin ? 'hide-bg' : ''}`} />
+    <div className={styles.landingpage}>
+      <video src={BgVideo} autoPlay muted loop className={`videoBg ${showLogin ? 'hideBg' : ''}`} />
       {show ? (
         showLogin ? (<Login handleSignupOrLogin={handleSignupOrLogin} />) :
         (<Signup handleSignupOrLogin={handleSignupOrLogin} />)
       ) : (
-        <div className="bg-overlay">
-          <div className="home-text">
+        <div className={styles.bgOverlay}>
+          <div className={styles.homeText}>
             <h1>Travel Gold</h1>
             <p>Live out your ideal vacation!</p>
-            <button onClick={handleLoginClick} className="login-btn">
+            <button onClick={handleLoginClick} className={styles.loginBtn}>
               Login
             </button>
-            <button onClick={handleSignupClick} className="signup-btn">
+            <button onClick={handleSignupClick} className={styles.signupBtn}>
               Signup
             </button>
           </div>
