@@ -9,8 +9,8 @@ function Signup(props) {
     setMessage(msg)
   }
   return (
-    <main className="container">
-      <h1>Sign Up</h1>
+    <main >
+      <h2>Sign Up</h2>
       <p>{message}</p>
       <SignupForm {...props} updateMessage={updateMessage} />
     </main>

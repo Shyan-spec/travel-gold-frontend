@@ -31,13 +31,13 @@ const Landingpage = () => {
 
       <div className="home-text">
         <h1>Travel Gold</h1>
-        <p>Live out your ideal vacation</p>
+        <p>Live out your ideal vacation!</p>
       </div>
 
       {/* Replace div elements with NavLink elements */}
       <NavLink to="/login" className="home-btn">Login</NavLink>
-      <NavLink to="/signup" className="home-btn">Sign Up</NavLink>
-      <NavLink to="/createitinerary" className="home-btn">Create Itinerary</NavLink>
+      <NavLink to="/signup" className="home-btn signup-btn">Sign Up</NavLink>
+      {/* <NavLink to="/createitinerary" className="home-btn">Create Itinerary</NavLink> */}
     </div>
   );
 }

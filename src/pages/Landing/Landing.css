@@ -27,18 +27,19 @@
 }
 
 .bg-overlay {
-    height: 100%;
-    width: 100%;
-    background-color: rgba(238, 233, 233, 0.5);
+    height: 80%;
+    width: 110%;
+    background-color: rgba(235, 233, 233, 0.5);
     position: absolute;
     top: 0;
     z-index: 0;
+    top: 10%; 
+    
 }
 
 .navbar {
     width: 100%;
-    height: 6em;
-    border-bottom: 2px solid black;
+    height: 4em;
     position: absolute;
     top: 0;
     left: 0;
@@ -71,13 +72,14 @@
 
 .home-text {
     width: 70%;
-    height: 160%;
+    height: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     z-index: 2;
     margin-top: 15vh;
+    font-style: italic;
 }
 
 h1 {
@@ -86,6 +88,8 @@ h1 {
     animation-duration: 4s;
     white-space: nowrap;
     color: black;
+    font-style: italic;
+    
   
 }
 
@@ -96,7 +100,7 @@ p {
 
 .home-btn {
     width: 8em;
-    height: 2.9em;
+    height: 2.1em;
     border: 2px solid white;
     border-radius: 0.25em;
     background-color: rgba(255, 255, 255, 0.457);
@@ -108,9 +112,19 @@ p {
     cursor: pointer;
     text-decoration: none;
     text-align: center; /* Center the text horizontally */
-    margin: 0.5em;
+    /* margin: 3em 0 0.8em; */
+    font-style: italic;
     
 }
+
+.signup-btn {
+    /* Add specific styles for the "Sign In" button */
+    color: black;
+    margin: 20%;
+  
+}
+
+
 
 /* ---------- Animation --------------- */
 /* @keyframes fade {
