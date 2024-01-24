@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import './SearchPage.css'; 
+import styles from './SearchPage.module.css' ; 
 import 'react-datepicker/dist/react-datepicker.css';
 import { Navbar } from '../../components/Navbar/Navbar';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -25,10 +25,10 @@ const SearchPage = () => {
   return (
     <>
       <Navbar />
-      <div className='main-container'>
+      <div className={styles.mainContainer}>
         <h2>This is Search Page!!</h2>
         {/* Move the DateRangePicker above the search input and button */}
-        <div className='schedule'>
+        <div className={styles.schedule}>
           <input
             type="text"
             placeholder="Search..."
