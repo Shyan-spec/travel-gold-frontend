@@ -3,21 +3,19 @@ import './Login.css'
 import { useState } from 'react'
 
 const Login = (props) => {
-  const [message, setMessage] = useState([''])
+  const [message, setMessage] = useState('');
 
-  const updateMessage = msg => {
-    setMessage(msg)
-  }
+  const updateMessage = (msg) => {
+    setMessage(msg);
+  };
+
   return (
-    <main className="container">
-      <h1>Log In</h1>
-      <p>{message}</p>
-      <Loginform
-        {...props}
-        updateMessage={updateMessage}
-      />
+    <main>
+      <h3 className="login-title">Login</h3>
+      <div className="login-message">{message}</div>
+      <Loginform {...props} updateMessage={updateMessage} />
     </main>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

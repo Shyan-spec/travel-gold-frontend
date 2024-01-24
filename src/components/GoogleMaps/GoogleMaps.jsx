@@ -4,13 +4,14 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-import "./GoogleMaps.css";
+import styles from "./GoogleMaps.module.css";
 import { useRef, useCallback, useState, useEffect } from "react";
 import axios from "axios";
 import Accordion from '@mui/material/Accordion'
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Navbar } from "../Navbar/Navbar";
 const libraries = ["places"];
 
 const center = {
@@ -93,24 +94,25 @@ const GoogleMaps = () => {
 
   return (
     <>
+    <Navbar/>
       {mapPresent ? (
         <>
-          <div className="container">
-            <div className="left-side">
-              <div className="search-bar">
+          <div className={styles.container}>
+            <div className={styles.leftSide}>
+              <div className={styles.searchBar}>
                 <input
                   type="text"
                   placeholder="Search (e.g., hotels, pizza, museums)"
                   value={searchQuery}
                   onChange={handleSearchInputChange}
-                  className="search-input"
+                  className={styles.searchInput}
                 />
-                <button type="button" className="search-button" onClick={handleSearchSubmit} >
+                <button type="button" className={styles.searchButton} onClick={handleSearchSubmit} >
                   Search Nearby
                 </button>
               </div>
-              <div className="Map">
-              <div className="google-maps">
+              <div className={styles.Map}>
+              <div className={styles.googleMaps}>
             <GoogleMap
               mapContainerStyle={{ width: '95%', height: '95%' , borderRadius: '10px' , boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)'}}
               center={center}
@@ -148,12 +150,12 @@ const GoogleMaps = () => {
               </div>
             </div>
 
-            <div className="right-side">
-                <div className="trip-title">
-                    <h1> CREATE ITINERARY </h1>
-                    <h2> New York </h2>
+            <div className={styles.rightSide}>
+                <div className={styles.tripTitle}>
+                    <h1 className={styles.createTitle}> CREATE ITINERARY </h1>
+                    <h2 className={styles.selectedPlaceTitle}> New York </h2>
                 </div>
-                <div className="itinerary">
+                <div className={styles.itinerary}>
                     <Accordion>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
@@ -191,9 +193,9 @@ const GoogleMaps = () => {
                         </AccordionDetails>
                     </Accordion>
                 </div>
-                <div className="save-cancel">
-                    <button className="save"> Cancel </button>
-                    <button className="cancel"> Save </button>
+                <div className={styles.saveCancel}>
+                    <button className={styles.cancel}> Cancel </button>
+                    <button className={styles.save}> Save </button>
                 </div>
             </div>
           </div>

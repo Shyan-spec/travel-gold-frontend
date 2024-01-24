@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './SignupForm.css'
+
 import * as  authService from '../../services/authService'
 
 export const SignupForm = (props) => {
@@ -94,9 +95,9 @@ export const SignupForm = (props) => {
         <button disabled={isFormInvalid()} className="button">
           Sign Up
         </button>
-        <Link to="/">
-          <button>Cancel</button>
-        </Link>
+        <Link to="/" className="cancelButton">
+  <button>Cancel</button>
+</Link>
       </div>
     </form>
   )
