@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import * as authService from '../../services/authService'
 import styles from './LoginForm.module.css'
-
+``
 const Loginform = (props) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -54,10 +54,10 @@ const Loginform = (props) => {
         />
       </div>
       <div>
-        <button className={styles.button}>Log In</button>
-        <Link to="/">
-          <button>Cancel</button>
-        </Link>
+      <button className={styles.loginButton}>Log In</button>
+<Link to="/">
+  <button className={styles.cancelButton}>Cancel</button>
+</Link>
       </div>
     </form>
   );

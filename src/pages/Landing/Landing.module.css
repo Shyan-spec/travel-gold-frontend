@@ -18,9 +18,9 @@
 }
 
 .bgOverlay {
-    height: 80%;
+    height: 75%;
     width: auto;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(255, 255, 255, 0);
     position: absolute;
     z-index: 0;
     top: 10%; 
@@ -44,25 +44,6 @@
     
 }
 
-/* .menu {
-    height: 3em;
-    width: 4em;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-left: 2em;
-    cursor: pointer;
-} */
-
-/* .menu div {
-    width: 90%;
-    height: 0.25em;
-    background-color: white;
-    border-radius: 1em;
-} */
-
-/* .menu div:nth-of-type(2) {width: 40%;} */
 
 .homeText {
     width: 70%;
@@ -72,7 +53,6 @@
     align-items: center;
     justify-content: space-around;
     z-index: 2;
-    margin-top: 15vh;
     font-style: italic;
 }
 
@@ -83,18 +63,20 @@
     white-space: nowrap;
     color: black;
     font-style: italic;
-    
+    font-family: 'Roboto', sans-serif;
     
   
 }
 
 .subHeaderTitle {
     justify-self: flex-end;
-    font-size: 2em;
+    font-size: 1.5em;
+    white-space: nowrap;
+    font-family: 'Roboto', sans-serif;
 }
 
 .loginBtn {
-    width: 8em;
+    width: 7em;
     height: 1.9em;
     border: 2px solid white;
     border-radius: 0.25em;
@@ -110,11 +92,12 @@
     font-style: italic;
     margin-top: 15%;
     
+    
 }
 
 
 .signupBtn {
-    width: 8em;
+    width: 7em;
     height: 1.9em;
     border: 2px solid white;
     border-radius: 0.25em;
@@ -128,7 +111,7 @@
     text-decoration: none;
     text-align: center; 
     font-style: italic;
-    margin-top: 5%;
+    margin-top: 3%;
     
 }
 

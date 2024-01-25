@@ -9,16 +9,26 @@
   } */
   
   /* Style for the search input and button */
+
+  label {
+    cursor: default;
+    margin-left: 20px;
+}
+  
   input {
-    width: 700px; 
-    height: 70px; /* Set the desired height */
-    margin: 10px 0; /* Add margin to space out the input from other elements */
+    width: 400px; 
+    height: 40px; /* Set the desired height */
+    margin: 15px 15px; /* Add margin to space out the input from other elements */
     padding: 8px;
+    
    
   }
   
-  button {
+  
+  .signupButton {
     padding: 8px 16px;
+    width: 30%;
+    
   }
   
   
@@ -47,3 +57,5 @@
   .schedule button {
     width: 100%;
   }
+
+  

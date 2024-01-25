@@ -45,32 +45,10 @@ input {
   outline: none;
 }
 
-.button {
-  background: gray;
-  color: #fff;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
 
-.button:hover {
-  background: red;
-}
-
-button {
-  margin-right: 10px;
-  background: gray;
-  color: #fff;
-  padding: 10px 15px;
-  border: none;
-  cursor: pointer;
-
-}
 
 button:hover {
-  background: #d32f2f;
+  background: gray;
 }
 
 

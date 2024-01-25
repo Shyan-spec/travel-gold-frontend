@@ -45,6 +45,8 @@ export const SignupForm = (props) => {
       onSubmit={handleSubmit}
       className={styles.container}
     >
+      <div className={styles.icon}>ICON PLACEHOLDER</div>
+
       <div className={styles.inputContainer}>
         <label htmlFor="name" className={styles.label}>Name</label>
         <input
@@ -92,11 +94,11 @@ export const SignupForm = (props) => {
         />
       </div>
       <div className={styles.inputContainer}>
-        <button disabled={isFormInvalid()} className={styles.button}>
+        <button disabled={isFormInvalid()} className={styles.signuppButton}>
           Sign Up
         </button>
-        <Link to="/" className={styles.cancelButton}>
-  <button>Cancel</button>
+        <Link to="/" >
+  <button className={styles.cancellButton}>Cancel</button>
 </Link>
       </div>
     </form>

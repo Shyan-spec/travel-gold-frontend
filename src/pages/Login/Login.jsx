@@ -11,7 +11,7 @@ const Login = (props) => {
 
   return (
     <>
-      <h3 className={styles.loginTitle}>Login</h3>
+      <h3 className={styles.loginTitle}></h3>
       <div className={styles.loginMessage}>{message}</div>
       <Loginform {...props} updateMessage={updateMessage} />
     </>

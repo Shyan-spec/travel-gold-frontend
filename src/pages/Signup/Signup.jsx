@@ -10,7 +10,7 @@ function Signup(props) {
   };
   return (
     <>
-      <h2 className={styles.signupTitle}>Sign Up</h2>
+      <h2 className={styles.signupTitle}></h2>
       <p>{message}</p>
       <SignupForm {...props} updateMessage={updateMessage} />
     </>

@@ -1,0 +1,29 @@
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+   
+
+}
+
+
+
+.loginButton {
+    /* Styles specific to the Log In button */
+    background-color:black; /* Example color */
+    color: #fff; /* Example text color */
+    /* Add any additional styles you want for the Log In button */
+    margin-left: 30%; 
+    height: 30px;
+    
+  }
+  
+  .cancelButton {
+    /* Styles specific to the Cancel button */
+    background-color:black; /* Example color */
+    color: #fff; /* Example text color */
+    /* Add any additional styles you want for the Cancel button */
+    margin-left: 5%;
+    height: 30px;
+    
+  }

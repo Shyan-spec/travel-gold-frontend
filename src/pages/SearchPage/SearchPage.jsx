@@ -40,7 +40,9 @@ const SearchPage = () => {
             <DateRangePicker localeText={{ start: 'Check-in', end: 'Check-out' }} />
           </DemoContainer>
         </LocalizationProvider>
-          <button onClick={handleSearch}>Search</button>
+        <button onClick={handleSearch} className={styles.signupButton}>
+  Search
+</button>
         </div>
       
       </div>

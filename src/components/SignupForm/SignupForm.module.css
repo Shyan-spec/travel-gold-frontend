@@ -1,0 +1,31 @@
+/* Add the following styles to your stylesheet */
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    height: 85px;
+
+   
+  }
+
+  .signuppButton {
+    width: 20%;
+    background-color:black; /* Example color */
+    color: #fff;
+    margin-left: 40%; 
+  }
+
+
+ 
+  .cancellButton {
+    width: 20%;
+    background-color:black; /* Example color */
+    color: #fff;
+    margin-left: 40%; 
+   
+    
+  }
+
+  .icon {
+    margin-bottom: 10%;
+  }
