@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh; 
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.3);
+    
+  }
+
+  
+  .signupTitle {
+    text-align: center;
+  }
+
+  .inputContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    color:black;
+    outline: none;
+    box-shadow: 0 0 5px black;
+  }
+  
+

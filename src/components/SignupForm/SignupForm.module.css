@@ -1,0 +1,52 @@
+/* Add the following styles to your stylesheet */
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+   
+  }
+
+  .signuppButton {
+   
+    background-color:black; /* Example color */
+    color: #fff;
+    
+  }
+
+
+ 
+  .cancellButton {
+    
+    background-color:black; /* Example color */
+    color: #fff;
+    
+   
+    
+  }
+
+  .saveCancelClass {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon {
+    margin-bottom: 10%;
+  }
+
+  .signForm {
+    width: 85%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    color:black;
+    outline: none;
+    margin-right: 15px;
+    margin-left: 15px;
+    
+  }
+  
+  .nameLabel {
+    margin-top: 1%;
+  }

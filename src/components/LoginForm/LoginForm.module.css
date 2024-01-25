@@ -1,0 +1,47 @@
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+   
+
+}
+
+
+
+
+.loginButton {
+    /* Styles specific to the Log In button */
+    background-color:black; /* Example color */
+    color: #fff; /* Example text color */
+    /* Add any additional styles you want for the Log In button */
+    margin-left: 30%; 
+    height: 30px;
+    
+  }
+  
+  .cancelButton {
+    /* Styles specific to the Cancel button */
+    background-color:black; /* Example color */
+    color: #fff; /* Example text color */
+    /* Add any additional styles you want for the Cancel button */
+    margin-left: 5%;
+    height: 30px;
+    
+  }
+
+  .inputField {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    color:black;
+    outline: none;
+  }
+  
+  .inputField {
+    width: 300px; /* Adjust the width based on your preference */
+    border: 1px solid #333; /* Set a dark gray border */
+    box-shadow: 0 0 5px black; /* Add a black shadow */
+    padding: 8px; /* Add padding for better spacing inside the input box */
+  }

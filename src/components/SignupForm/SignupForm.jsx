@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import './SignupForm.css'
+import styles from './SignupForm.module.css'
+
 import * as  authService from '../../services/authService'
 
 export const SignupForm = (props) => {
@@ -42,11 +43,13 @@ export const SignupForm = (props) => {
     <form
       autoComplete="off"
       onSubmit={handleSubmit}
-      className="container"
+      className={styles.inputContainer}
     >
-      <div className="inputContainer">
-        <label htmlFor="name" className="label">Name</label>
-        <input
+      <div className={styles.icon}>ICON PLACEHOLDER</div>
+
+      <div >
+        <label htmlFor="name" className={styles.nameLabel}>Name</label>
+        <input className={styles.signForm}
           type="text"
           autoComplete="off"
           id="name"
@@ -55,9 +58,9 @@ export const SignupForm = (props) => {
           onChange={handleChange}
         />
       </div>
-      <div className="inputContainer">
-        <label htmlFor="email" className="label">Email</label>
-        <input
+      <div >
+        <label htmlFor="email" className={styles.label}>Email</label>
+        <input className={styles.signForm}
           type="text"
           autoComplete="off"
           id="email"
@@ -66,9 +69,9 @@ export const SignupForm = (props) => {
           onChange={handleChange}
         />
       </div>
-      <div className="inputContainer">
-        <label htmlFor="password" className="label">Password</label>
-        <input
+      <div >
+        <label htmlFor="password" className={styles.label}>Password</label>
+        <input className={styles.signForm}
           type="password"
           autoComplete="off"
           id="password"
@@ -77,11 +80,11 @@ export const SignupForm = (props) => {
           onChange={handleChange}
         />
       </div>
-      <div className="inputContainer">
-        <label htmlFor="confirm" className="label">
+      <div >
+        <label htmlFor="confirm" className={styles.label}>
           Confirm Password
         </label>
-        <input
+        <input className={styles.signForm}
           type="password"
           autoComplete="off"
           id="confirm"
@@ -90,13 +93,13 @@ export const SignupForm = (props) => {
           onChange={handleChange}
         />
       </div>
-      <div className="inputContainer">
-        <button disabled={isFormInvalid()} className="button">
+      <div className={styles.saveCancelClass}>
+        <button disabled={isFormInvalid()} className={styles.signuppButton}>
           Sign Up
         </button>
-        <Link to="/">
-          <button>Cancel</button>
-        </Link>
+        <Link to="/" >
+  <button className={styles.cancellButton}>Cancel</button>
+</Link>
       </div>
     </form>
   )

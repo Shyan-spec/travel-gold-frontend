@@ -1,23 +1,21 @@
 import Loginform from '../../components/LoginForm/Loginform'
-import './Login.css'
+import styles from './Login.module.css'
 import { useState } from 'react'
 
 const Login = (props) => {
-  const [message, setMessage] = useState([''])
+  const [message, setMessage] = useState('');
 
-  const updateMessage = msg => {
-    setMessage(msg)
-  }
+  const updateMessage = (msg) => {
+    setMessage(msg);
+  };
+
   return (
-    <main className="container">
-      <h1>Log In</h1>
-      <p>{message}</p>
-      <Loginform
-        {...props}
-        updateMessage={updateMessage}
-      />
-    </main>
-  )
-}
+    <>
+      <h3 className={styles.loginTitle}></h3>
+      <div className={styles.loginMessage}>{message}</div>
+      <Loginform {...props} updateMessage={updateMessage} />
+    </>
+  );
+};
 
-export default Login
+export default Login;
