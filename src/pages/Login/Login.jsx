@@ -10,11 +10,11 @@ const Login = (props) => {
   };
 
   return (
-    <main>
+    <>
       <h3 className={styles.loginTitle}>Login</h3>
       <div className={styles.loginMessage}>{message}</div>
       <Loginform {...props} updateMessage={updateMessage} />
-    </main>
+    </>
   );
 };
 

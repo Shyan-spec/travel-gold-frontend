@@ -4,9 +4,11 @@
     align-items: center;
     justify-content: center;
     height: 90vh; 
+    z-index: 1;
   }
+
   
-  h2 {
+  .signupTitle {
     text-align: center;
   }
 

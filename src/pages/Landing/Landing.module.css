@@ -19,7 +19,7 @@
 
 .bgOverlay {
     height: 80%;
-    width: 30%;
+    width: auto;
     background: rgba(255, 255, 255, 0.02);
     position: absolute;
     z-index: 0;
@@ -76,7 +76,7 @@
     font-style: italic;
 }
 
-h1 {
+.logoTitle {
     font-size: 5em;
     animation-name: fade;
     animation-duration: 4s;
@@ -88,7 +88,7 @@ h1 {
   
 }
 
-p {
+.subHeaderTitle {
     justify-self: flex-end;
     font-size: 2em;
 }

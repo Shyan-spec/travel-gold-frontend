@@ -22,15 +22,15 @@ const Landingpage = ({handleSignupOrLogin}) => {
 
   return (
     <div className={styles.landingpage}>
-      <video src={BgVideo} autoPlay muted loop className={`videoBg ${showLogin ? 'hideBg' : ''}`} />
+      <video src={BgVideo} autoPlay muted loop className={`${styles.videoBg} ${showLogin ? styles.hideBg : ''}`}  />
       {show ? (
-        showLogin ? (<Login handleSignupOrLogin={handleSignupOrLogin} />) :
-        (<Signup handleSignupOrLogin={handleSignupOrLogin} />)
+        showLogin ? (<div className={styles.bgOverlay}><Login handleSignupOrLogin={handleSignupOrLogin} /></div>) :
+        (<div className={styles.bgOverlay}><Signup handleSignupOrLogin={handleSignupOrLogin} /></div>)
       ) : (
         <div className={styles.bgOverlay}>
           <div className={styles.homeText}>
-            <h1>Travel Gold</h1>
-            <p>Live out your ideal vacation!</p>
+            <h1 className={styles.logoTitle}>Travel Gold</h1>
+            <h2 className={styles.subHeaderTitle}>Live out your ideal vacation!</h2>
             <button onClick={handleLoginClick} className={styles.loginBtn}>
               Login
             </button>

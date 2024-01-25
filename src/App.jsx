@@ -7,7 +7,7 @@ import { useState } from 'react';
 import CreateItinerary from './pages/CreateItinerary/CreateItinerary';
 import SearchPage from './pages/SearchPage/SearchPage';
 import MyItinerariesPage from './pages/MyItinerariesPage/MyItinerariesPage'; 
-import styles from './App.module.css'
+import './App.css'
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
   }
 
   return (
-    <div className={styles.App}>
+    <div className="App">
       <Routes>
         <Route path="/" element={<Landing handleSignupOrLogin={handleSignupOrLogin}/>} />
         <Route path="/createitinerary" element={<CreateItinerary />} />
