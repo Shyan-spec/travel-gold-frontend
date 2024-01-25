@@ -1,28 +1,11 @@
-/* src/pages/SearchPage/SearchPage.css */
 
-/* Center the entire content of the SearchPage */
-/* div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-   
-  } */
-  
-  /* Style for the search input and button */
 
   label {
     cursor: default;
     margin-left: 20px;
 }
   
-  input {
-    width: 400px; 
-    height: 40px; /* Set the desired height */
-    margin: 15px 15px; /* Add margin to space out the input from other elements */
-    padding: 8px;
-    
-   
-  }
+ 
   
   
   .signupButton {

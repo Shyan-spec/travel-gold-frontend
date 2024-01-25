@@ -35,26 +35,22 @@
   margin-bottom: 5px;
 }
 
-input {
-  width: 100%;
-  padding: 10px;
+
+
+
+button {
+  margin-right: 10px;
+  background: gray;
+  color: #fff;
+  padding: 10px 15px;
   border: none;
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.3);
-  color:black;
-  outline: none;
+  cursor: pointer;
+ 
+
 }
-
-
 
 button:hover {
   background: gray;
 }
 
 
-input {
-  width: 300px; /* Adjust the width based on your preference */
-  border: 1px solid #333; /* Set a dark gray border */
-  box-shadow: 0 0 5px black; /* Add a black shadow */
-  padding: 8px; /* Add padding for better spacing inside the input box */
-}

@@ -38,6 +38,7 @@ const Loginform = (props) => {
           value={formData.email}
           name="email"
           onChange={handleChange}
+          className={styles.inputField}
         />
       </div>
       <div className={styles.inputContainer}>
@@ -51,6 +52,7 @@ const Loginform = (props) => {
           value={formData.password}
           name="password"
           onChange={handleChange}
+          className={styles.inputField}
         />
       </div>
       <div>

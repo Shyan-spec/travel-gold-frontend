@@ -3,29 +3,50 @@
 .inputContainer {
     display: flex;
     flex-direction: column;
-    height: 85px;
-
    
   }
 
   .signuppButton {
-    width: 20%;
+   
     background-color:black; /* Example color */
     color: #fff;
-    margin-left: 40%; 
+    
   }
 
 
  
   .cancellButton {
-    width: 20%;
+    
     background-color:black; /* Example color */
     color: #fff;
-    margin-left: 40%; 
+    
    
     
   }
 
+  .saveCancelClass {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .icon {
     margin-bottom: 10%;
+  }
+
+  .signForm {
+    width: 85%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    color:black;
+    outline: none;
+    margin-right: 15px;
+    margin-left: 15px;
+    
+  }
+  
+  .nameLabel {
+    margin-top: 1%;
   }

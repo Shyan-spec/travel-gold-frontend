@@ -43,13 +43,13 @@ export const SignupForm = (props) => {
     <form
       autoComplete="off"
       onSubmit={handleSubmit}
-      className={styles.container}
+      className={styles.inputContainer}
     >
       <div className={styles.icon}>ICON PLACEHOLDER</div>
 
-      <div className={styles.inputContainer}>
-        <label htmlFor="name" className={styles.label}>Name</label>
-        <input
+      <div >
+        <label htmlFor="name" className={styles.nameLabel}>Name</label>
+        <input className={styles.signForm}
           type="text"
           autoComplete="off"
           id="name"
@@ -58,9 +58,9 @@ export const SignupForm = (props) => {
           onChange={handleChange}
         />
       </div>
-      <div className={styles.inputContainer}>
+      <div >
         <label htmlFor="email" className={styles.label}>Email</label>
-        <input
+        <input className={styles.signForm}
           type="text"
           autoComplete="off"
           id="email"
@@ -69,9 +69,9 @@ export const SignupForm = (props) => {
           onChange={handleChange}
         />
       </div>
-      <div className={styles.inputContainer}>
+      <div >
         <label htmlFor="password" className={styles.label}>Password</label>
-        <input
+        <input className={styles.signForm}
           type="password"
           autoComplete="off"
           id="password"
@@ -80,11 +80,11 @@ export const SignupForm = (props) => {
           onChange={handleChange}
         />
       </div>
-      <div className={styles.inputContainer}>
+      <div >
         <label htmlFor="confirm" className={styles.label}>
           Confirm Password
         </label>
-        <input
+        <input className={styles.signForm}
           type="password"
           autoComplete="off"
           id="confirm"
@@ -93,7 +93,7 @@ export const SignupForm = (props) => {
           onChange={handleChange}
         />
       </div>
-      <div className={styles.inputContainer}>
+      <div className={styles.saveCancelClass}>
         <button disabled={isFormInvalid()} className={styles.signuppButton}>
           Sign Up
         </button>
