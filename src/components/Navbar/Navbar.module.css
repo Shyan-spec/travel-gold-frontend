@@ -5,7 +5,9 @@ nav {
     background-color: #0F172A;
     height: 50px;
     font-family: 'Cormorant Garamond', serif;
-    margin-bottom: 1%
+    margin-bottom: 1%;
+    position: relative;
+    z-index: 2;
 }
 nav .title {
     font-size: 1.5rem;
