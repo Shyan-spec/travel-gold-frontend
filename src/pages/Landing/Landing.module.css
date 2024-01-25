@@ -1,121 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Italianno&display=swap");
+
 .landingpage {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    position: relative;
-    transition: 0.5s;
-    font-family: serif;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  transition: 0.5s;
+  font-family: serif;
+}
+
+.Logo {
+  width: 60%;
 }
 .videoBg {
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-    object-fit: cover;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  object-fit: cover;
 }
 
 .bgOverlay {
-    height: 75%;
-    width: 500px;
-    background: rgba(255, 255, 255, 0);
-    position: absolute;
-    z-index: 0;
-    top: 10%;
-    justify-content: center;
-    display: flex;
-    border-radius: 20px;
-    backdrop-filter: blur(5px);
-    align-items: center;
+  height: 75%;
+  width: 500px;
+  background: rgba(255, 255, 255, 0);
+  position: absolute;
+  z-index: 0;
+  top: 10%;
+  justify-content: center;
+  display: flex;
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+  align-items: center;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
 }
 
 .navbar {
-    width: 100%;
-    height: 4em;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    z-index: 1;
-    
+  width: 100%;
+  height: 4em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 1;
 }
 
-
 .homeText {
-    width: 70%;
-    height: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    z-index: 2;
-    font-style: italic;
+  width: 70%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 2;
 }
 
 .logoTitle {
-    font-size: 5em;
-    animation-name: fade;
-    animation-duration: 4s;
-    white-space: nowrap;
-    color: black;
-    font-style: italic;
-    font-family: 'Roboto', sans-serif;
-    
-  
+  font-size: 5em;
+  animation-name: fade;
+  animation-duration: 4s;
+  white-space: nowrap;
+  color: black;
+  font-family: "Cormorant Garamond", serif;
+  position: relative;
+    top: -5%;
+    font-size: 10rem;
+    margin: 0;
 }
 
 .subHeaderTitle {
-    justify-self: flex-end;
-    font-size: 1.5em;
-    white-space: nowrap;
-    font-family: 'Roboto', sans-serif;
+  justify-self: flex-end;
+  font-size: 1.5em;
+  white-space: nowrap;
+  font-family: "Roboto", sans-serif;
+}
+
+.logosubheaderTitle {
+    font-family: "Italianno", cursive;
+    background: -webkit-linear-gradient( 45deg, #a67c00, #bf9b30, #ffdc73, #bf9b30, #a67c00 );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    font-weight: bold;
+    margin-left: 9%;
+    position: relative;
+    top: -15%;
+    font-size: 2.5rem;
+    /* margin-left: 1%; */
+    /* width: 33%; */
+    padding-right: 10%;
+    margin: 0px;
+    left: 5.5%;
 }
 
 .loginBtn {
-    width: 7em;
-    height: 1.9em;
-    border: 2px solid white;
-    border-radius: 0.25em;
-    background-color: rgba(255, 255, 255, 0.457);
-    z-index: 1;
-    font-size: 2em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center; 
-    font-style: italic;
-    margin-top: 15%;
-    
-    
+  width: 7em;
+  height: 1.9em;
+  border: 2px solid white;
+  border-radius: 0.25em;
+  background-color: rgba(255, 255, 255, 0.457);
+  z-index: 1;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  font-style: italic;
+  margin-top: 15%;
 }
-
 
 .signupBtn {
-    width: 7em;
-    height: 1.9em;
-    border: 2px solid white;
-    border-radius: 0.25em;
-    background-color: rgba(255, 255, 255, 0.457);
-    z-index: 1;
-    font-size: 2em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center; 
-    font-style: italic;
-    margin-top: 3%;
-    
+  width: 7em;
+  height: 1.9em;
+  border: 2px solid white;
+  border-radius: 0.25em;
+  background-color: rgba(255, 255, 255, 0.457);
+  z-index: 1;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  font-style: italic;
+  margin-top: 3%;
 }
-
-
 
 /* ---------- Animation --------------- */
 /* @keyframes fade {
