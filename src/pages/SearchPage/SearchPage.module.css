@@ -1,44 +1,82 @@
-
-
-  label {
-    cursor: default;
-    margin-left: 20px;
+/* Style for the search input and button */
+.searchInputField {
+  height: 39px;
+  margin: 10px 0;
+  padding: 8px;
+  border-radius: 10px 0px 0px 10px;
 }
-  
- 
-  
-  
-  .signupButton {
-    padding: 8px 16px;
-    width: 30%;
-    
-  }
-  
-  
-  
+
+.searchButton {
+  padding: 20px 12px;
+  max-width: 15%;
+  height: 72%;
+  border-radius: 0px 10px 10px 0px;
+  background-color: black;
+  font-size: 1rem;
+}
+
+.navbar {
+  position: relative; /* or 'absolute', depending on your layout */
+  z-index: 2;
+}
+
+.planeBg {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0; /* Ensure it starts from the very left */
+  object-fit: cover;
+  overflow: hidden;
+  z-index: 1; /* Lower than the navbar */
+}
+
 .mainContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh; 
-    height: 92vh;
+  display: grid;
+  grid-template-columns: 1fr; /* One column layout */
+  grid-template-rows: auto auto; /* Two rows: auto-sized to fit content */
+  justify-content: center;
+  align-items: center;
+  height: 92vh; /* Adjusted to single height property */
+  grid-template-areas:
+    "headerContainer"
+    "scheduleContainer";
+}
+
+.headerContainer {
+  grid-area: headerContainer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  z-index: 1;
 }
 
 .schedule {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  display: flex;
+  align-items: center;
+  width: 85%;
   
-  .schedule > * {
-    flex: 1;
-    margin-right: 10px; /* Adjust margin as needed */
-  }
-  
-  .schedule input,
-  .schedule button {
-    width: 100%;
-  }
+}
 
-  
+.scheduleContainer {
+  grid-area: scheduleContainer;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15%;
+    z-index: 1;
+}
+
+.schedule > * {
+  flex: 1; /* Makes each child flexibly occupy equal space */
+}
+
+.schedule input,
+.schedule button {
+  width: 100%; /* Full width within their flex container */
+}
+
+.header {
+  font-size: 7rem;
+  margin-bottom: 0;
+}
