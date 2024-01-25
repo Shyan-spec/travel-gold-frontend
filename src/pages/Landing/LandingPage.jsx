@@ -3,6 +3,7 @@ import BgVideo from '../../media/bg.mp4';
 import Login from '../Login/Login'; // Import your Login component
 import Signup from '../Signup/Signup';
 import styles from './Landing.module.css'
+import Logo from '../../assets/Logo.png'
 
 const Landingpage = ({handleSignupOrLogin}) => {
   const [show, setShow] = useState(false);
@@ -38,8 +39,10 @@ const Landingpage = ({handleSignupOrLogin}) => {
           )
       ) : (
         <div className={styles.bgOverlay}>
+          <img src={Logo} className={styles.Logo}/>
           <div className={styles.homeText}>
-            <h1 className={styles.logoTitle}>Travel Gold</h1>
+            <h1 className={styles.logoTitle}>TG</h1>
+            <h2 className={styles.logosubheaderTitle}> Travel Gold </h2>
             <h2 className={styles.subHeaderTitle}>Live out your ideal vacation!</h2>
             <button onClick={handleLoginClick} className={styles.loginBtn}>
               Login
