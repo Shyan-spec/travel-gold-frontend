@@ -104,11 +104,7 @@ const GoogleMaps = () => {
       const place = response.data;
       place.geometry = {location: {lng: lng, lat: lat}};
       setSelectedPlace(place);
-      setMarkerPosition({ lat: lat, lng: lng });
-      place.geometry = {location: {lng: lng, lat: lat}};
-      setSelectedPlace(place);
     }
-    
     setMarkerPosition({ lat: lat, lng: lng });
   };
 
