@@ -28,8 +28,11 @@ const GoogleMaps = () => {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const location = useLocation();
   const searchResults = location.state?.searchResults;
+
   const [itinerary, setItinerary] = useState({
     itineraryName: "",
+    startDate: searchResults.startDate,
+    endDate: searchResults.endDate,
     locationName: searchResults.place.name,
     placeIds: [],
   });
@@ -38,6 +41,15 @@ const GoogleMaps = () => {
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
     libraries,
   });
+
+  const handleSaveItinerary = () => {
+    setItinerary(prevItinerary => ({
+        ...prevItinerary,
+        placeIds: pointsOfInterest.map((point) =>  { return point.id})
+    }));
+
+    console.log(itinerary)
+};
 
   const center = {
     lat: searchResults.place.lat,
@@ -49,22 +61,27 @@ const GoogleMaps = () => {
   }, [nearbyPlaces]);
 
   const handleAddress = (lat, lng) => {
-    console.log(lat, lng);
-    if (!isLoaded) return;
-
-    const geocoder = new window.google.maps.Geocoder();
-
-    geocoder.geocode({ location: { lat, lng } }, (results, status) => {
-      if (status === "OK") {
-        if (results[0]) {
-          setAddress(results[0].formatted_address);
-        } else {
-          console.log("No results found");
-        }
-      } else {
-        console.log("Geocoder failed due to: " + status);
+    return new Promise((resolve, reject) => {
+      if (!isLoaded) {
+        reject("Map is not loaded yet");
+        return;
       }
-      console.log(address);
+  
+      const geocoder = new window.google.maps.Geocoder();
+      geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+        if (status === "OK") {
+          if (results[0]) {
+            setAddress(results[0].formatted_address);
+            resolve(results[0].formatted_address);
+          } else {
+            console.log("No results found");
+            reject("No results found");
+          }
+        } else {
+          console.log("Geocoder failed due to: " + status);
+          reject("Geocoder failed");
+        }
+      });
     });
   };
 
@@ -120,7 +137,7 @@ const GoogleMaps = () => {
     });
   }, []);
 
-  const handleAddToPointOfIntrest = (selectedPlace) => {
+  const handleAddToPointOfInterest = (selectedPlace) => {
     setPointsOfInterest(prevPoints => [
       ...prevPoints, {
       name: selectedPlace.name,
@@ -129,8 +146,14 @@ const GoogleMaps = () => {
       lng: selectedPlace.geometry.location.lng,
       id: selectedPlace.place_id
     }]);
-    console.log(pointsOfInterest, address)
   };
+
+  const handleChange = (event) => {
+    setItinerary(prevItinerary => ({
+        ...prevItinerary,
+        itineraryName: event.target.value
+    }));
+};
 
   useEffect(() => {
     console.log(pointsOfInterest);
@@ -183,7 +206,7 @@ const GoogleMaps = () => {
                           lat: place.geometry.location.lat,
                           lng: place.geometry.location.lng,
                         }}
-                        onClick={() => handleMarkerClick(place)}
+                        onClick={() => {handleMarkerClick(place),handleAddress(place.geometry.location.lat,place.geometry.location.lng) }}
                       />
                     ))}
                     {selectedPlace && (
@@ -199,12 +222,16 @@ const GoogleMaps = () => {
                           <p> {address} </p>
                           <button
                             className={styles.saveLocation}
-                            onClick={() => {
-                              handleAddress(
-                                selectedPlace.geometry.location.lat,
-                                selectedPlace.geometry.location.lng
-                              )
-                              handleAddToPointOfIntrest(selectedPlace)
+                            onClick={async () => {
+                              try {
+                                const fetchedAddress = await handleAddress(
+                                  selectedPlace.geometry.location.lat,
+                                  selectedPlace.geometry.location.lng
+                                );
+                                handleAddToPointOfInterest({ ...selectedPlace, address: fetchedAddress });
+                              } catch (error) {
+                                console.error("Error fetching address:", error);
+                              }
                             }}
                           >
                             {" "}
@@ -224,7 +251,9 @@ const GoogleMaps = () => {
                 <h1 className={styles.createTitle}> CREATE ITINERARY </h1>
                 <input
                   placeholder="Create Itinerary Name"
+                  name="itineraryName"
                   className={styles.userItineraryChoiceField}
+                  onChange={handleChange}
                 />
                 <h2 className={styles.selectedPlaceTitle}>
                   {" "}
@@ -232,11 +261,11 @@ const GoogleMaps = () => {
                 </h2>
               </div>
               <div className={styles.itinerary}>
-                <PointsOfInterest />
+                <PointsOfInterest pointsOfInterest={pointsOfInterest}/>
               </div>
               <div className={styles.saveCancel}>
                 <button className={styles.cancel}> Cancel </button>
-                <button className={styles.save}> Save </button>
+                <button onClick={handleSaveItinerary} className={styles.save}> Save </button>
               </div>
             </div>
           </div>
