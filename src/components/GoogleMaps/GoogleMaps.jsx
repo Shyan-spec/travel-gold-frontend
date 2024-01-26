@@ -69,6 +69,8 @@ const GoogleMaps = () => {
   };
 
   const handleMarkerClick = (place) => {
+    console.log(`place:`, place);
+    // TODO use place.vicinity for address
     setSelectedPlace(place);
   };
 
@@ -91,11 +93,23 @@ const GoogleMaps = () => {
     fetchNearbyPlaces(center.lat, center.lng, searchQuery);
   };
 
-  const handleMapClick = (event) => {
-    setMarkerPosition({
-      lat: event.latLng.lat(),
-      lng: event.latLng.lng(),
-    });
+  // TODO have handle marker click also display the InfoWindow
+  const handleMapClick = async (event) => {
+    const lat = event.latLng.lat();
+    const lng = event.latLng.lng();
+    console.log('lat/lng', lat, lng);
+    if (event.placeId) {
+      const response = await axios.get(
+        `http://localhost:3001/google/api/place/${event.placeId}`);
+      const place = response.data;
+      place.geometry = {location: {lng: lng, lat: lat}};
+      setSelectedPlace(place);
+      setMarkerPosition({ lat: lat, lng: lng });
+      place.geometry = {location: {lng: lng, lat: lat}};
+      setSelectedPlace(place);
+    }
+    
+    setMarkerPosition({ lat: lat, lng: lng });
   };
 
   const initAutocomplete = useCallback((map) => {
