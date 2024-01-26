@@ -21,9 +21,14 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Landing handleSignupOrLogin={handleSignupOrLogin}/>} />
+
+        {/* since we are staying in the landing page for sign up and sign in, the cancle button would nit redirect me to "/" landing page because we are technically still there  */}
+        <Route  path="/home" element={<CreateItinerary handleSignupOrLogin={handleSignupOrLogin}/>} />
+
         <Route path="/createitinerary" element={<CreateItinerary />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/itineraries" element={<MyItinerariesPage />} /> {/* Add route for MyItinerariesPage */}
+        <Route path="/logout" />
     </Routes>
    </div>
   );

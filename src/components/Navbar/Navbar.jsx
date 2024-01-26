@@ -1,5 +1,13 @@
-import { NavLink } from 'react-router-dom';
 import styles from './Navbar.module.css';
+import { NavLink, useNavigate } from 'react-router-dom';
+
+const navigate = useNavigate;
+
+const handleLogout = () => {
+  localStorage.removeItem('token');
+  // Redirect to the landing page
+  navigate('/');
+};
 
 export const Navbar = () => {
   return (
@@ -7,8 +15,8 @@ export const Navbar = () => {
       <NavLink to="/" className={styles.title}>Travel Gold
       </NavLink>
       <ul>
-        <li><NavLink to="/signup" className={styles.active}>Sign Up</NavLink></li>
-        <li><NavLink to="/login" className={styles.active}>Login</NavLink></li>
+        {/* <li><NavLink to="/signup" className={styles.active}></NavLink></li> */}
+        <li><NavLink to="/" onClick={handleLogout} className={styles.active}>Logout</NavLink></li>
       </ul>
     </nav>
   );

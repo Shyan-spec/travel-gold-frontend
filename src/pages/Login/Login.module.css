@@ -40,8 +40,8 @@
 
 button {
   margin-right: 10px;
-  background: gray;
-  color: #fff;
+  background: transparent;
+  color: black;
   padding: 10px 15px;
   border: none;
   cursor: pointer;
@@ -50,7 +50,7 @@ button {
 }
 
 button:hover {
-  background: gray;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
 }
 
 
