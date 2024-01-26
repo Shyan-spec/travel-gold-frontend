@@ -10,14 +10,16 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
-import Typography from '@mui/material/Typography';
+import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import { Navbar } from "../Navbar/Navbar";
+import PointsOfInterest from "../PointsOfInterest/PointsOfInterest.jsx";
 const libraries = ["places"];
 
 // Your fetchPlaceId function (if you're fetching additional details using place_id)
 
 const GoogleMaps = () => {
+  const [address, setAddress] = useState("");
   const autocompleteInputRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [mapPresent, setMapPresent] = useState(true);
@@ -26,7 +28,12 @@ const GoogleMaps = () => {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const location = useLocation();
   const searchResults = location.state?.searchResults;
-  console.log(searchResults);
+  const [itinerary, setItinerary] = useState({
+    itineraryName: "",
+    locationName: searchResults.place.name,
+    placeIds: [],
+  });
+  const [pointsOfInterest, setPointsOfInterest] = useState([]);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -41,6 +48,26 @@ const GoogleMaps = () => {
     console.log(nearbyPlaces);
   }, [nearbyPlaces]);
 
+  const handleAddress = (lat, lng) => {
+    console.log(lat, lng);
+    if (!isLoaded) return;
+
+    const geocoder = new window.google.maps.Geocoder();
+
+    geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+      if (status === "OK") {
+        if (results[0]) {
+          setAddress(results[0].formatted_address);
+        } else {
+          console.log("No results found");
+        }
+      } else {
+        console.log("Geocoder failed due to: " + status);
+      }
+      console.log(address);
+    });
+  };
+
   const handleMarkerClick = (place) => {
     setSelectedPlace(place);
   };
@@ -48,7 +75,7 @@ const GoogleMaps = () => {
   async function fetchNearbyPlaces(lat, lng, query) {
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/nearbySearch?lat=${lat}&lng=${lng}&query=${query}`
+        `http://localhost:3001/google/api/nearbySearch?lat=${lat}&lng=${lng}&query=${query}`
       );
       setNearbyPlaces(response.data);
     } catch (error) {
@@ -92,6 +119,22 @@ const GoogleMaps = () => {
       }
     });
   }, []);
+
+  const handleAddToPointOfIntrest = (selectedPlace) => {
+    setPointsOfInterest(prevPoints => [
+      ...prevPoints, {
+      name: selectedPlace.name,
+      address: address,
+      lat: selectedPlace.geometry.location.lat,
+      lng: selectedPlace.geometry.location.lng,
+      id: selectedPlace.place_id
+    }]);
+    console.log(pointsOfInterest, address)
+  };
+
+  useEffect(() => {
+    console.log(pointsOfInterest);
+  }, [pointsOfInterest]);
 
   if (loadError) return <div>Error loading maps</div>;
   if (!isLoaded) return <div>Loading maps</div>;
@@ -153,7 +196,20 @@ const GoogleMaps = () => {
                       >
                         <div>
                           <h3>{selectedPlace.name}</h3>
-                          {/* Other place details */}
+                          <p> {address} </p>
+                          <button
+                            className={styles.saveLocation}
+                            onClick={() => {
+                              handleAddress(
+                                selectedPlace.geometry.location.lat,
+                                selectedPlace.geometry.location.lng
+                              )
+                              handleAddToPointOfIntrest(selectedPlace)
+                            }}
+                          >
+                            {" "}
+                            Add To Points Of Intrests
+                          </button>
                         </div>
                       </InfoWindow>
                     )}
@@ -166,19 +222,17 @@ const GoogleMaps = () => {
             <div className={styles.rightSide}>
               <div className={styles.tripTitle}>
                 <h1 className={styles.createTitle}> CREATE ITINERARY </h1>
-                <h2 className={styles.selectedPlaceTitle}> {searchResults.place.name} </h2>
+                <input
+                  placeholder="Create Itinerary Name"
+                  className={styles.userItineraryChoiceField}
+                />
+                <h2 className={styles.selectedPlaceTitle}>
+                  {" "}
+                  {searchResults.place.name}{" "}
+                </h2>
               </div>
               <div className={styles.itinerary}>
-                <Card sx={{ minWidth: 275 }}>
-                  <CardContent>
-                  <Typography variant="h1" sx={{fontSize: '2rem'}}>
-                      Points of Intrest: 
-                    </Typography>
-                    <Typography variant="body2">
-                      well meaning and kindly.
-                    </Typography>
-                  </CardContent>
-                </Card>
+                <PointsOfInterest />
               </div>
               <div className={styles.saveCancel}>
                 <button className={styles.cancel}> Cancel </button>
