@@ -1,6 +1,6 @@
 import TextField from "@mui/material/TextField";
-import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useRef, useCallback } from "react";
 import styles from "./SearchPage.module.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { Navbar } from "../../components/Navbar/Navbar";
@@ -8,19 +8,92 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import planeBgVideo from "../../media/pexels-jer-rey-11374334 (1080p).mp4";
+import { GoogleMap, useLoadScript } from "@react-google-maps/api";
+import GoogleMaps from "../../components/GoogleMaps/GoogleMaps";
 
 const SearchPage = () => {
+  const libraries = ["places"];
+  const autocompleteInputRef = useRef(null);
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const location = useLocation();
+  const [searchResults, setSearchResults] = useState({
+    place: {
+      lat: null,
+      lng: null,
+      name: null,
+      place_id: "",
+    },
+    startDate: null,
+    endDate: null,
+  });
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+    libraries,
+  });
 
-  const handleSearch = () => {
-    setSearchResults(results);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchResults({ ...searchResults, [e.target.name]: e.target.value });
+    navigate("/createItinerary" , { state: {searchResults}});
+    console.log(searchResults);
   };
+
+  const handleDateChange = (fieldName, newValue) => {
+    setSearchResults((prevResults) => ({
+      ...prevResults,
+      [fieldName]: newValue,
+    }));
+  };
+
+  const initAutocomplete = useCallback(
+    (map) => {
+      if (!autocompleteInputRef.current || !isLoaded) return;
+
+      const autocomplete = new window.google.maps.places.Autocomplete(
+        autocompleteInputRef.current
+      );
+      autocomplete.setFields(["place_id", "geometry", "name"]);
+
+      autocomplete.addListener("place_changed", () => {
+        const place = autocomplete.getPlace();
+
+        if (!place.geometry) {
+          window.alert("No details available for input: '" + place.name + "'");
+          return;
+        }
+
+        const lat = place.geometry.location.lat();
+        const lng = place.geometry.location.lng();
+        const name = place.name;
+        const place_id = place.place_id;
+
+        console.log(lat, lng);
+        console.log(place);
+
+        setSearchResults((prevResults) => ({
+          ...prevResults,
+          place: {
+            lat: lat,
+            lng: lng,
+            name: name,
+            place_id: place_id,
+          },
+        }));
+
+        if (place.geometry.viewport) {
+          map.fitBounds(place.geometry.viewport);
+        } else {
+          map.setCenter(place.geometry.location);
+          map.setZoom(17);
+        }
+      });
+    },
+    [isLoaded] // Dependencies for useCallback
+  );
 
   return (
     <>
-      <Navbar className={styles.navbar}/>
+      <Navbar className={styles.navbar} />
       <div className={styles.mainContainer}>
         <video
           src={planeBgVideo}
@@ -37,24 +110,56 @@ const SearchPage = () => {
           </h1>
         </div>
         <div className={styles.scheduleContainer}>
-          <div className={styles.schedule}>
+          <form className={styles.schedule}>
             <input
               type="text"
+              name="place"
               placeholder="Search..."
-              value={searchQuery}
-              onChange={() => {}}
+              ref={autocompleteInputRef}
               className={styles.searchInputField}
+              onChange={() => {
+                console.log(autocompleteInputRef.current.value);
+              }}
             />
+            {isLoaded && (
+              <GoogleMap
+                mapContainerStyle={{
+                  width: "95%",
+                  height: "95%",
+                  borderRadius: "10px",
+                  boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
+                  display: "none",
+                }}
+                zoom={13}
+                onLoad={initAutocomplete}
+                value={searchResults.place}
+                onChange={(e) =>
+                  setSearchResults({ ...searchResults, place: e.target.value })
+                }
+              ></GoogleMap>
+            )}
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker className={styles.ehh} />
+              <DatePicker
+                name="startDate"
+                value={searchResults.startDate}
+                onChange={(newValue) => handleDateChange("startDate", newValue)}
+                className={styles.ehh}
+              />
             </LocalizationProvider>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker className={styles.ehh} />
+              <DatePicker
+                name="endDate"
+                value={searchResults.endDate}
+                onChange={(newValue) => handleDateChange("endDate", newValue)}
+                className={styles.ehh}
+              />
             </LocalizationProvider>
-            <button className={styles.searchButton} onClick={handleSearch}>
-              Search
-            </button>
-          </div>
+            <Link to="/createItinerary">
+              <button className={styles.searchButton} onClick={handleSearch}>
+                Search
+              </button>
+            </Link>
+          </form>
         </div>
       </div>
     </>
