@@ -1,9 +1,9 @@
-//import styles from "./PointsOfInterest.css";
+import styles from './PointsOfInterest.module.css'
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 
-const PointsOfInterest = ({ pointsOfInterest }) => {
+const PointsOfInterest = ({ pointsOfInterest, deletePointOfInterest }) => {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
@@ -15,8 +15,8 @@ const PointsOfInterest = ({ pointsOfInterest }) => {
             return (
               <>
                 <div key={index}>
-                  <h2> {location.name} </h2>
-                  <p> {location.address} </p>
+                  <h2> {location.name} <button onClick={() => {deletePointOfInterest(location.place_id)}} className={styles.deleteButton}> X </button></h2>
+                  <p> {location.formatted_address || location.address} </p>
                 </div>
               </>
             );
