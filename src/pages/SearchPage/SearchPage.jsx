@@ -7,12 +7,9 @@ import { Navbar } from "../../components/Navbar/Navbar";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import planeBgVideo from "../../Media/pexels-zlatin-georgiev-5608053 (2160p) (1).mp4";
+import photo from "../../Media/pexels-marta-branco-1510492.jpg";
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import axios from "axios";
-
-
-
 
 const SearchPage = () => {
   const libraries = ["places"];
@@ -34,25 +31,28 @@ const SearchPage = () => {
     libraries,
   });
 
-  const handleSearch = async(e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
     setSearchResults({ ...searchResults, [e.target.name]: e.target.value });
 
-    const response = await axios.post(`${import.meta.env.VITE_BACK_END_SERVER_URL}/itineraries/`, {
-      locationName: searchResults.place.name,
-      startDate: searchResults.startDate.$d,
-      endDate: searchResults.endDate.$d
-    }, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}` // Assuming a Bearer token, adjust if different
+    const response = await axios.post(
+      `${import.meta.env.VITE_BACK_END_SERVER_URL}/itineraries/`,
+      {
+        locationName: searchResults.place.name,
+        startDate: searchResults.startDate.$d,
+        endDate: searchResults.endDate.$d,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`, // Assuming a Bearer token, adjust if different
+        },
       }
-  });
+    );
 
-    console.log(response.data, localStorage.getItem('token'))
+    console.log(response.data, localStorage.getItem('token'));
 
-    const itineraryId = response.data.itineraryId
+    const itineraryId = response.data.itineraryId;
     navigate("/createItinerary", { state: { searchResults, itineraryId } });
-          
   };
 
   const handleDateChange = (fieldName, newValue) => {
@@ -75,7 +75,9 @@ const SearchPage = () => {
         const place = autocomplete.getPlace();
 
         if (!place.geometry) {
-          window.alert("No details available for input: '" + place.name + "'");
+          window.alert(
+            "No details available for input: '" + place.name + "'"
+          );
           return;
         }
 
@@ -112,13 +114,8 @@ const SearchPage = () => {
     <>
       <Navbar className={styles.navbar} />
       <div className={styles.mainContainer}>
-        <video
-          src={planeBgVideo}
-          autoPlay
-          muted
-          loop
-          className={styles.planeBg}
-        />
+        {/* Replace video with img */}
+        <img src={photo} alt="Background" className={styles.planeBg} />
         <div className={styles.headerContainer}>
           <h1 className={styles.header}> WELCOME BACK!</h1>
           <h1 className={styles.subHeader}>
@@ -146,8 +143,6 @@ const SearchPage = () => {
                   borderRadius: "10px",
                   boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
                   display: "none",
-                 
-
                 }}
                 zoom={13}
                 onLoad={initAutocomplete}
@@ -161,7 +156,9 @@ const SearchPage = () => {
               <DatePicker
                 name="startDate"
                 value={searchResults.startDate}
-                onChange={(newValue) => handleDateChange("startDate", newValue)}
+                onChange={(newValue) =>
+                  handleDateChange("startDate", newValue)
+                }
                 className={styles.ehh}
               />
             </LocalizationProvider>
@@ -169,12 +166,17 @@ const SearchPage = () => {
               <DatePicker
                 name="endDate"
                 value={searchResults.endDate}
-                onChange={(newValue) => handleDateChange("endDate", newValue)}
+                onChange={(newValue) =>
+                  handleDateChange("endDate", newValue)
+                }
                 className={styles.ehh}
               />
             </LocalizationProvider>
             <Link to="/createItinerary">
-              <button className={styles.searchButton} onClick={handleSearch}>
+              <button
+                className={styles.searchButton}
+                onClick={handleSearch}
+              >
                 Search
               </button>
             </Link>
