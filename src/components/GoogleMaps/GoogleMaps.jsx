@@ -19,6 +19,7 @@ const GoogleMaps = () => {
   const autocompleteInputRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [mapPresent, setMapPresent] = useState(true);
+  const [map, setMap] = useState(null);
   const [markerPosition, setMarkerPosition] = useState(null);
   const [nearbyPlaces, setNearbyPlaces] = useState([]);
   const [selectedPlace, setSelectedPlace] = useState(null);
@@ -26,7 +27,6 @@ const GoogleMaps = () => {
   const searchResults = location.state?.searchResults;
   const itineraryId = location.state?.itineraryId;
   const [center, setCenter] = useState({lat: searchResults.place.lat, lng: searchResults.place.lng});
-  console.log(searchResults);
   const [itinerary, setItinerary] = useState({
     itineraryName: "",
     placeIds: [],
@@ -36,10 +36,6 @@ const GoogleMaps = () => {
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
     libraries,
   });
-
-  const updateCenter = (lat,lng) => {
-    setCenter({lat: lat, lng: lng});
-  };
 
   useEffect(() => {
     const getItinerary = async () => {
@@ -62,6 +58,10 @@ const GoogleMaps = () => {
     };
     getItinerary();
   }, []);
+
+  const handleMapDragEnd = () => {
+    setCenter({lat: map.center.lat(), lng: map.center.lng()});
+  };
 
   const deletePointOfInterest = async (placeId) => {
     try {
@@ -155,7 +155,8 @@ const GoogleMaps = () => {
     setSearchQuery(e.target.value);
   };
 
-  const handleSearchSubmit = () => {
+  const handleSearchSubmit = (e) => {
+    console.log(e);
     fetchNearbyPlaces(center.lat, center.lng, searchQuery);
   };
 
@@ -182,6 +183,7 @@ const GoogleMaps = () => {
       if (place.geometry.viewport) {
         map.fitBounds(place.geometry.viewport);
       } else {
+        console.log(place.geometry);
         map.setCenter(center);
         map.setZoom(17);
       }
@@ -241,6 +243,8 @@ const GoogleMaps = () => {
               <div className={styles.Map}>
                 <div className={styles.googleMaps}>
                   <GoogleMap
+                    id="GOOGLE_MAP"
+                    onDragEnd={handleMapDragEnd}
                     mapContainerStyle={{
                       width: "95%",
                       height: "95%",
@@ -249,7 +253,10 @@ const GoogleMaps = () => {
                     }}
                     center={center}
                     zoom={13}
-                    onLoad={initAutocomplete}
+                    onLoad={(map) => {
+                      initAutocomplete(map);
+                      setMap(map);
+                    }}
                     onClick={handleMapClick}
                   >
                     {nearbyPlaces.map((place, index) => (
