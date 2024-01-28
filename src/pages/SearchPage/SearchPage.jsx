@@ -9,7 +9,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import planeBgVideo from "../../media/pexels-jer-rey-11374334 (1080p).mp4";
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
-import GoogleMaps from "../../components/GoogleMaps/GoogleMaps";
+import axios from "axios";
 
 const SearchPage = () => {
   const libraries = ["places"];
@@ -31,11 +31,25 @@ const SearchPage = () => {
     libraries,
   });
 
-  const handleSearch = (e) => {
+  const handleSearch = async(e) => {
     e.preventDefault();
     setSearchResults({ ...searchResults, [e.target.name]: e.target.value });
-    navigate("/createItinerary" , { state: {searchResults}});
-    console.log(searchResults);
+
+    const response = await axios.post(`${import.meta.env.VITE_BACK_END_SERVER_URL}/itineraries/`, {
+      locationName: searchResults.place.name,
+      startDate: searchResults.startDate.$d,
+      endDate: searchResults.endDate.$d
+    }, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}` // Assuming a Bearer token, adjust if different
+      }
+  });
+
+    console.log(response.data, localStorage.getItem('token'))
+
+    const itineraryId = response.data.itineraryId
+    navigate("/createItinerary", { state: { searchResults, itineraryId } });
+          
   };
 
   const handleDateChange = (fieldName, newValue) => {

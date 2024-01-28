@@ -6,18 +6,16 @@ import {
 } from "@react-google-maps/api";
 import styles from "./GoogleMaps.module.css";
 import { useRef, useCallback, useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import axios from "axios";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import Typography from '@mui/material/Typography';
-import CardContent from "@mui/material/CardContent";
 import { Navbar } from "../Navbar/Navbar";
+import PointsOfInterest from "../PointsOfInterest/PointsOfInterest.jsx";
 const libraries = ["places"];
 
 // Your fetchPlaceId function (if you're fetching additional details using place_id)
 
 const GoogleMaps = () => {
+  const [address, setAddress] = useState("");
   const autocompleteInputRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [mapPresent, setMapPresent] = useState(true);
@@ -26,11 +24,90 @@ const GoogleMaps = () => {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const location = useLocation();
   const searchResults = location.state?.searchResults;
-  console.log(searchResults);
+  const itineraryId = location.state?.itineraryId;
+
+  const [itinerary, setItinerary] = useState({
+    itineraryName: "",
+    placeIds: [],
+  });
+  const [pointsOfInterest, setPointsOfInterest] = useState([]);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
     libraries,
   });
+
+  useEffect(() => {
+    const getItinerary = async () => {
+      const fetchItinerary = await axios.get(
+        `${
+          import.meta.env.VITE_BACK_END_SERVER_URL
+        }/itineraries/${itineraryId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming a Bearer token, adjust if different
+          },
+        }
+      );
+      setItinerary({
+        itineraryName: fetchItinerary.data.name,
+      });
+
+      setPointsOfInterest(fetchItinerary.data.places);
+
+      console.log(fetchItinerary.data.name, fetchItinerary.data.places);
+    };
+    getItinerary();
+  }, []);
+
+  const deletePointOfInterest = async (placeId) => {
+    try {
+      console.log(`Deleting place with ID: ${placeId}`);
+      const response = await axios.delete(
+        `${
+          import.meta.env.VITE_BACK_END_SERVER_URL
+        }/itineraries/${itineraryId}/poi/${placeId}`
+      );
+      console.log("Delete response:", response);
+
+      if (response.status === 200) {
+        setPointsOfInterest((prev) => {
+          const updatedPoints = prev.filter((poi) => poi.place_id !== placeId);
+          console.log("Updated points of interest:", updatedPoints);
+          return updatedPoints;
+        });
+      } else {
+        console.error("Delete operation was not successful");
+      }
+    } catch (error) {
+      console.error("Error deleting point of interest:", error);
+    }
+  };
+
+  const handleSaveItinerary = async () => {
+    const response = await axios.put(
+      `${import.meta.env.VITE_BACK_END_SERVER_URL}/itineraries/${itineraryId}`,
+      {
+        name: itinerary.itineraryName,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming a Bearer token, adjust if different
+        },
+      }
+    );
+
+    console.log(response.data);
+  };
+
+  const addPoiToBackend = async (placeId, lat, lng) => {
+    let placeInfo = await axios.get(
+      `${
+        import.meta.env.VITE_BACK_END_SERVER_URL
+      }/itineraries/${itineraryId}/poi/${placeId}/${lat}/${lng}`
+    );
+
+    return placeInfo;
+  };
 
   const center = {
     lat: searchResults.place.lat,
@@ -41,6 +118,31 @@ const GoogleMaps = () => {
     console.log(nearbyPlaces);
   }, [nearbyPlaces]);
 
+  const handleAddress = (lat, lng) => {
+    return new Promise((resolve, reject) => {
+      if (!isLoaded) {
+        reject("Map is not loaded yet");
+        return;
+      }
+
+      const geocoder = new window.google.maps.Geocoder();
+      geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+        if (status === "OK") {
+          if (results[0]) {
+            setAddress(results[0].formatted_address);
+            resolve(results[0].formatted_address);
+          } else {
+            console.log("No results found");
+            reject("No results found");
+          }
+        } else {
+          console.log("Geocoder failed due to: " + status);
+          reject("Geocoder failed");
+        }
+      });
+    });
+  };
+
   const handleMarkerClick = (place) => {
     setSelectedPlace(place);
   };
@@ -48,7 +150,7 @@ const GoogleMaps = () => {
   async function fetchNearbyPlaces(lat, lng, query) {
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/nearbySearch?lat=${lat}&lng=${lng}&query=${query}`
+        `http://localhost:3001/google/api/nearbySearch?lat=${lat}&lng=${lng}&query=${query}`
       );
       setNearbyPlaces(response.data);
     } catch (error) {
@@ -92,6 +194,32 @@ const GoogleMaps = () => {
       }
     });
   }, []);
+
+  const handleAddToPointOfInterest = (selectedPlace) => {
+    setPointsOfInterest((prevPoints) => [
+      ...prevPoints,
+      {
+        name: selectedPlace.name,
+        address: address,
+        lat: selectedPlace.geometry.location.lat,
+        lng: selectedPlace.geometry.location.lng,
+        id: selectedPlace.place_id,
+      },
+    ]);
+  };
+
+  const handleChange = (event) => {
+    setItinerary((prevItinerary) => ({
+      ...prevItinerary,
+      itineraryName: event.target.value,
+    }));
+
+    console.log(itinerary);
+  };
+
+  useEffect(() => {
+    console.log(pointsOfInterest);
+  }, [pointsOfInterest]);
 
   if (loadError) return <div>Error loading maps</div>;
   if (!isLoaded) return <div>Loading maps</div>;
@@ -140,7 +268,13 @@ const GoogleMaps = () => {
                           lat: place.geometry.location.lat,
                           lng: place.geometry.location.lng,
                         }}
-                        onClick={() => handleMarkerClick(place)}
+                        onClick={() => {
+                          handleMarkerClick(place),
+                            handleAddress(
+                              place.geometry.location.lat,
+                              place.geometry.location.lng
+                            );
+                        }}
                       />
                     ))}
                     {selectedPlace && (
@@ -153,7 +287,33 @@ const GoogleMaps = () => {
                       >
                         <div>
                           <h3>{selectedPlace.name}</h3>
-                          {/* Other place details */}
+                          <p> {address} </p>
+                          <button
+                            className={styles.saveLocation}
+                            onClick={async () => {
+                              try {
+                                const fetchedAddress = await handleAddress(
+                                  selectedPlace.geometry.location.lat,
+                                  selectedPlace.geometry.location.lng
+                                );
+                                handleAddToPointOfInterest({
+                                  ...selectedPlace,
+                                  address: fetchedAddress,
+                                  id: selectedPlace.place_id,
+                                });
+                                addPoiToBackend(
+                                  selectedPlace.place_id,
+                                  selectedPlace.geometry.location.lat,
+                                  selectedPlace.geometry.location.lng
+                                );
+                              } catch (error) {
+                                console.error("Error fetching address:", error);
+                              }
+                            }}
+                          >
+                            {" "}
+                            Add To Points Of Intrests
+                          </button>
                         </div>
                       </InfoWindow>
                     )}
@@ -166,23 +326,32 @@ const GoogleMaps = () => {
             <div className={styles.rightSide}>
               <div className={styles.tripTitle}>
                 <h1 className={styles.createTitle}> CREATE ITINERARY </h1>
-                <h2 className={styles.selectedPlaceTitle}> {searchResults.place.name} </h2>
+                <input
+                  placeholder="Create An Itinerary Name..."
+                  name="itineraryName"
+                  className={styles.userItineraryChoiceField}
+                  onChange={handleChange}
+                  value={itinerary.itineraryName}
+                />
+                <h2 className={styles.selectedPlaceTitle}>
+                  {" "}
+                  {searchResults.place.name}{" "}
+                </h2>
               </div>
               <div className={styles.itinerary}>
-                <Card sx={{ minWidth: 275 }}>
-                  <CardContent>
-                  <Typography variant="h1" sx={{fontSize: '2rem'}}>
-                      Points of Intrest: 
-                    </Typography>
-                    <Typography variant="body2">
-                      well meaning and kindly.
-                    </Typography>
-                  </CardContent>
-                </Card>
+                <PointsOfInterest
+                  pointsOfInterest={pointsOfInterest}
+                  handleSaveItinerary={handleSaveItinerary}
+                  deletePointOfInterest={deletePointOfInterest}
+                />
               </div>
               <div className={styles.saveCancel}>
                 <button className={styles.cancel}> Cancel </button>
-                <button className={styles.save}> Save </button>
+                <Link to='/itineraries'>
+                  <button onClick={handleSaveItinerary} className={styles.save}>
+                    Save
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
