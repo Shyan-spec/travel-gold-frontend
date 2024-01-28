@@ -7,6 +7,7 @@ import { useState } from 'react';
 import CreateItinerary from './pages/CreateItinerary/CreateItinerary';
 import SearchPage from './pages/SearchPage/SearchPage';
 import MyItinerariesPage from './pages/MyItinerariesPage/MyItinerariesPage'; 
+import ItineraryDetailsPage from './pages/ ItineraryDetailsPage/ItineraryDetailsPage';
 import './App.css'
 
 
@@ -23,7 +24,8 @@ function App() {
         <Route path="/" element={<Landing handleSignupOrLogin={handleSignupOrLogin}/>} />
         <Route path="/createitinerary" element={<CreateItinerary />} />
         <Route path="/search" element={<SearchPage />} />
-        <Route path="/itineraries" element={<MyItinerariesPage />} /> {/* Add route for MyItinerariesPage */}
+        <Route path="/itineraries" element={<MyItinerariesPage />} /> 
+        <Route path="/itineraries/:itinerary" element={<ItineraryDetailsPage/>}/>
     </Routes>
    </div>
   );

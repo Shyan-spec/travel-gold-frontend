@@ -6,7 +6,7 @@ import {
 } from "@react-google-maps/api";
 import styles from "./GoogleMaps.module.css";
 import { useRef, useCallback, useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import axios from "axios";
 import { Navbar } from "../Navbar/Navbar";
 import PointsOfInterest from "../PointsOfInterest/PointsOfInterest.jsx";
@@ -61,23 +61,27 @@ const GoogleMaps = () => {
 
   const deletePointOfInterest = async (placeId) => {
     try {
-        console.log(`Deleting place with ID: ${placeId}`);
-        const response = await axios.delete(`${import.meta.env.VITE_BACK_END_SERVER_URL}/itineraries/${itineraryId}/poi/${placeId}`);
-        console.log('Delete response:', response);
+      console.log(`Deleting place with ID: ${placeId}`);
+      const response = await axios.delete(
+        `${
+          import.meta.env.VITE_BACK_END_SERVER_URL
+        }/itineraries/${itineraryId}/poi/${placeId}`
+      );
+      console.log("Delete response:", response);
 
-        if (response.status === 200) {
-            setPointsOfInterest(prev => {
-                const updatedPoints = prev.filter(poi => poi.place_id !== placeId);
-                console.log('Updated points of interest:', updatedPoints);
-                return updatedPoints;
-            });
-        } else {
-            console.error('Delete operation was not successful');
-        }
+      if (response.status === 200) {
+        setPointsOfInterest((prev) => {
+          const updatedPoints = prev.filter((poi) => poi.place_id !== placeId);
+          console.log("Updated points of interest:", updatedPoints);
+          return updatedPoints;
+        });
+      } else {
+        console.error("Delete operation was not successful");
+      }
     } catch (error) {
-        console.error("Error deleting point of interest:", error);
+      console.error("Error deleting point of interest:", error);
     }
-};
+  };
 
   const handleSaveItinerary = async () => {
     const response = await axios.put(
@@ -295,7 +299,7 @@ const GoogleMaps = () => {
                                 handleAddToPointOfInterest({
                                   ...selectedPlace,
                                   address: fetchedAddress,
-                                  id: selectedPlace.place_id
+                                  id: selectedPlace.place_id,
                                 });
                                 addPoiToBackend(
                                   selectedPlace.place_id,
@@ -323,7 +327,7 @@ const GoogleMaps = () => {
               <div className={styles.tripTitle}>
                 <h1 className={styles.createTitle}> CREATE ITINERARY </h1>
                 <input
-                  placeholder="Create Itinerary Name"
+                  placeholder="Create An Itinerary Name..."
                   name="itineraryName"
                   className={styles.userItineraryChoiceField}
                   onChange={handleChange}
@@ -343,10 +347,11 @@ const GoogleMaps = () => {
               </div>
               <div className={styles.saveCancel}>
                 <button className={styles.cancel}> Cancel </button>
-                <button onClick={handleSaveItinerary} className={styles.save}>
-                  {" "}
-                  Save{" "}
-                </button>
+                <Link to='/itineraries'>
+                  <button onClick={handleSaveItinerary} className={styles.save}>
+                    Save
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
