@@ -12,8 +12,6 @@ import { Navbar } from "../Navbar/Navbar";
 import PointsOfInterest from "../PointsOfInterest/PointsOfInterest.jsx";
 const libraries = ["places"];
 
-// Your fetchPlaceId function (if you're fetching additional details using place_id)
-
 const GoogleMaps = () => {
   const [address, setAddress] = useState("");
   const autocompleteInputRef = useRef(null);
