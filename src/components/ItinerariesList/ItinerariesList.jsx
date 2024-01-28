@@ -33,9 +33,15 @@ const ItineraryList = () => {
       ) : (
         <ul className="itinList">
           {itineraries.map((itinerary) => (
+            console.log(itinerary),
             <li key={itinerary._id}>
-              <Link to={`/itineraries/${itinerary._id}`}>
-              {itinerary.name}
+              <Link
+                to={{
+                  pathname: `/itineraries/${itinerary._id}`,
+                  state: { itinerary },
+                }}
+              >
+                {itinerary.name}
               </Link>
             </li>
           ))}
