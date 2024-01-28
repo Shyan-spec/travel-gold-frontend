@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './SignupForm.module.css'
+import Logo from '../../assets/Logo.png'
 
 import * as  authService from '../../services/authService'
 
@@ -38,16 +39,22 @@ export const SignupForm = (props) => {
     return !(name && email && password && password === passwordConf)
   }
 
+    const handleRefresh = () => {
+      window.location.reload();
+    }
 
   return (
     <form
       autoComplete="off"
       onSubmit={handleSubmit}
       className={styles.inputContainer}
-    >
-      <div className={styles.icon}>ICON PLACEHOLDER</div>
-
-      <div >
+      >
+        
+      <div className={styles.icon}>
+      <img src={Logo} className={styles.Loogo}/>
+      </div>
+    
+      <div>
         <label htmlFor="name" className={styles.nameLabel}>Name</label>
         <input className={styles.signForm}
           type="text"
@@ -98,7 +105,7 @@ export const SignupForm = (props) => {
           Sign Up
         </button>
         <Link to="/" >
-  <button className={styles.cancellButton}>Cancel</button>
+  <button className={styles.cancellButton} onClick={handleRefresh}   >Cancel</button>
 </Link>
       </div>
     </form>

@@ -8,26 +8,31 @@
 
   .signuppButton {
    
-    background-color:black; /* Example color */
-    color: #fff;
-    
+    color: black;
+    height: 30px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
+    font-family: "Cormorant Garamond", serif;
+    justify-content: center;
   }
+    
+  
 
 
  
   .cancellButton {
-    
-    background-color:black; /* Example color */
-    color: #fff;
-    
-   
-    
+    color: black;
+    margin-left: 8%;
+    height: 30px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
+    font-family: "Cormorant Garamond", serif;
+    justify-content: center;
   }
 
   .saveCancelClass {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 2rem;
   }
 
   .icon {
@@ -35,7 +40,7 @@
   }
 
   .signForm {
-    width: 85%;
+    width: 95%;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -43,10 +48,24 @@
     color:black;
     outline: none;
     margin-right: 15px;
-    margin-left: 15px;
+    
     
   }
   
   .nameLabel {
     margin-top: 1%;
+  }
+  .Loogo {
+    height: 49rem;
+    margin: 0 auto;
+
+  }
+
+  .Loogo {
+    height: 13rem;
+    align-items: center;
+    display: flex;
+    margin: auto;
+    margin-top: -34%;
+    margin-bottom: -30px;
   }
