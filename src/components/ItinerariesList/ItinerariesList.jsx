@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const ItineraryList = () => {
   const [itineraries, setItneraries] = useState([]);
@@ -8,13 +9,17 @@ const ItineraryList = () => {
   useEffect(() => {
     const fetchItins = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BACK_END_SERVER_URL}/itineraries`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming a Bearer token, adjust if different
-        }})
-        setItneraries(response.data.itineraries)
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACK_END_SERVER_URL}/itineraries`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming a Bearer token, adjust if different
+            },
+          }
+        );
+        setItneraries(response.data.itineraries);
       } catch (error) {
-        console.error('error fetching the itinerary list', error)
+        console.error("error fetching the itinerary list", error);
       }
     };
     fetchItins();
@@ -27,16 +32,17 @@ const ItineraryList = () => {
         <p> No itineraries found </p>
       ) : (
         <ul className="itinList">
-          {itineraries.map(itinerary => (
+          {itineraries.map((itinerary) => (
             <li key={itinerary._id}>
+              <Link to={`/itineraries/${itinerary._id}`}>
               {itinerary.name}
+              </Link>
             </li>
           ))}
         </ul>
       )}
     </div>
-  )
-}
+  );
+};
 
-
-export default ItineraryList
+export default ItineraryList;

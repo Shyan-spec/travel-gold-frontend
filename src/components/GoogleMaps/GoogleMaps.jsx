@@ -325,6 +325,7 @@ const GoogleMaps = () => {
               <div className={styles.tripTitle}>
                 <h1 className={styles.createTitle}> CREATE ITINERARY </h1>
                 <input
+                  required
                   placeholder="Create An Itinerary Name..."
                   name="itineraryName"
                   className={styles.userItineraryChoiceField}
