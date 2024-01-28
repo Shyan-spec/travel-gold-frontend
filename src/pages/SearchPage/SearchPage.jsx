@@ -7,9 +7,12 @@ import { Navbar } from "../../components/Navbar/Navbar";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import planeBgVideo from "../../media/pexels-jer-rey-11374334 (1080p).mp4";
+import planeBgVideo from "../../Media/pexels-zlatin-georgiev-5608053 (2160p) (1).mp4";
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import axios from "axios";
+
+
+
 
 const SearchPage = () => {
   const libraries = ["places"];
@@ -143,6 +146,8 @@ const SearchPage = () => {
                   borderRadius: "10px",
                   boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
                   display: "none",
+                 
+
                 }}
                 zoom={13}
                 onLoad={initAutocomplete}
