@@ -24,6 +24,7 @@ function App() {
         <Route path="/createitinerary" element={<CreateItinerary />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/itineraries" element={<MyItinerariesPage />} /> {/* Add route for MyItinerariesPage */}
+        
     </Routes>
    </div>
   );
