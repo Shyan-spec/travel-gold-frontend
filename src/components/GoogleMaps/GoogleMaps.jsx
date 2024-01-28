@@ -6,12 +6,8 @@ import {
 } from "@react-google-maps/api";
 import styles from "./GoogleMaps.module.css";
 import { useRef, useCallback, useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import axios from "axios";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import Typography from "@mui/material/Typography";
-import CardContent from "@mui/material/CardContent";
 import { Navbar } from "../Navbar/Navbar";
 import PointsOfInterest from "../PointsOfInterest/PointsOfInterest.jsx";
 const libraries = ["places"];
@@ -28,12 +24,10 @@ const GoogleMaps = () => {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const location = useLocation();
   const searchResults = location.state?.searchResults;
+  const itineraryId = location.state?.itineraryId;
 
   const [itinerary, setItinerary] = useState({
     itineraryName: "",
-    startDate: searchResults.startDate,
-    endDate: searchResults.endDate,
-    locationName: searchResults.place.name,
     placeIds: [],
   });
   const [pointsOfInterest, setPointsOfInterest] = useState([]);
@@ -42,14 +36,78 @@ const GoogleMaps = () => {
     libraries,
   });
 
-  const handleSaveItinerary = () => {
-    setItinerary(prevItinerary => ({
-        ...prevItinerary,
-        placeIds: pointsOfInterest.map((point) =>  { return point.id})
-    }));
+  useEffect(() => {
+    const getItinerary = async () => {
+      const fetchItinerary = await axios.get(
+        `${
+          import.meta.env.VITE_BACK_END_SERVER_URL
+        }/itineraries/${itineraryId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming a Bearer token, adjust if different
+          },
+        }
+      );
+      setItinerary({
+        itineraryName: fetchItinerary.data.name,
+      });
 
-    console.log(itinerary)
-};
+      setPointsOfInterest(fetchItinerary.data.places);
+
+      console.log(fetchItinerary.data.name, fetchItinerary.data.places);
+    };
+    getItinerary();
+  }, []);
+
+  const deletePointOfInterest = async (placeId) => {
+    try {
+      console.log(`Deleting place with ID: ${placeId}`);
+      const response = await axios.delete(
+        `${
+          import.meta.env.VITE_BACK_END_SERVER_URL
+        }/itineraries/${itineraryId}/poi/${placeId}`
+      );
+      console.log("Delete response:", response);
+
+      if (response.status === 200) {
+        setPointsOfInterest((prev) => {
+          const updatedPoints = prev.filter((poi) => poi.place_id !== placeId);
+          console.log("Updated points of interest:", updatedPoints);
+          return updatedPoints;
+        });
+      } else {
+        console.error("Delete operation was not successful");
+      }
+    } catch (error) {
+      console.error("Error deleting point of interest:", error);
+    }
+  };
+
+  const handleSaveItinerary = async () => {
+    const response = await axios.put(
+      `${import.meta.env.VITE_BACK_END_SERVER_URL}/itineraries/${itineraryId}`,
+      {
+        name: itinerary.itineraryName,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming a Bearer token, adjust if different
+        },
+      }
+    );
+
+    console.log(response.data);
+  };
+
+  const addPoiToBackend = async (placeId, lat, lng) => {
+    let placeInfo = await axios.get(
+      `${
+        import.meta.env.VITE_BACK_END_SERVER_URL
+      }/itineraries/${itineraryId}/poi/${placeId}/${lat}/${lng}`
+    );
+
+    return placeInfo;
+  };
 
   const center = {
     lat: searchResults.place.lat,
@@ -66,7 +124,7 @@ const GoogleMaps = () => {
         reject("Map is not loaded yet");
         return;
       }
-  
+
       const geocoder = new window.google.maps.Geocoder();
       geocoder.geocode({ location: { lat, lng } }, (results, status) => {
         if (status === "OK") {
@@ -138,22 +196,26 @@ const GoogleMaps = () => {
   }, []);
 
   const handleAddToPointOfInterest = (selectedPlace) => {
-    setPointsOfInterest(prevPoints => [
-      ...prevPoints, {
-      name: selectedPlace.name,
-      address: address,
-      lat: selectedPlace.geometry.location.lat,
-      lng: selectedPlace.geometry.location.lng,
-      id: selectedPlace.place_id
-    }]);
+    setPointsOfInterest((prevPoints) => [
+      ...prevPoints,
+      {
+        name: selectedPlace.name,
+        address: address,
+        lat: selectedPlace.geometry.location.lat,
+        lng: selectedPlace.geometry.location.lng,
+        id: selectedPlace.place_id,
+      },
+    ]);
   };
 
   const handleChange = (event) => {
-    setItinerary(prevItinerary => ({
-        ...prevItinerary,
-        itineraryName: event.target.value
+    setItinerary((prevItinerary) => ({
+      ...prevItinerary,
+      itineraryName: event.target.value,
     }));
-};
+
+    console.log(itinerary);
+  };
 
   useEffect(() => {
     console.log(pointsOfInterest);
@@ -206,7 +268,13 @@ const GoogleMaps = () => {
                           lat: place.geometry.location.lat,
                           lng: place.geometry.location.lng,
                         }}
-                        onClick={() => {handleMarkerClick(place),handleAddress(place.geometry.location.lat,place.geometry.location.lng) }}
+                        onClick={() => {
+                          handleMarkerClick(place),
+                            handleAddress(
+                              place.geometry.location.lat,
+                              place.geometry.location.lng
+                            );
+                        }}
                       />
                     ))}
                     {selectedPlace && (
@@ -228,7 +296,16 @@ const GoogleMaps = () => {
                                   selectedPlace.geometry.location.lat,
                                   selectedPlace.geometry.location.lng
                                 );
-                                handleAddToPointOfInterest({ ...selectedPlace, address: fetchedAddress });
+                                handleAddToPointOfInterest({
+                                  ...selectedPlace,
+                                  address: fetchedAddress,
+                                  id: selectedPlace.place_id,
+                                });
+                                addPoiToBackend(
+                                  selectedPlace.place_id,
+                                  selectedPlace.geometry.location.lat,
+                                  selectedPlace.geometry.location.lng
+                                );
                               } catch (error) {
                                 console.error("Error fetching address:", error);
                               }
@@ -250,10 +327,11 @@ const GoogleMaps = () => {
               <div className={styles.tripTitle}>
                 <h1 className={styles.createTitle}> CREATE ITINERARY </h1>
                 <input
-                  placeholder="Create Itinerary Name"
+                  placeholder="Create An Itinerary Name..."
                   name="itineraryName"
                   className={styles.userItineraryChoiceField}
                   onChange={handleChange}
+                  value={itinerary.itineraryName}
                 />
                 <h2 className={styles.selectedPlaceTitle}>
                   {" "}
@@ -261,11 +339,19 @@ const GoogleMaps = () => {
                 </h2>
               </div>
               <div className={styles.itinerary}>
-                <PointsOfInterest pointsOfInterest={pointsOfInterest}/>
+                <PointsOfInterest
+                  pointsOfInterest={pointsOfInterest}
+                  handleSaveItinerary={handleSaveItinerary}
+                  deletePointOfInterest={deletePointOfInterest}
+                />
               </div>
               <div className={styles.saveCancel}>
                 <button className={styles.cancel}> Cancel </button>
-                <button onClick={handleSaveItinerary} className={styles.save}> Save </button>
+                <Link to='/itineraries'>
+                  <button onClick={handleSaveItinerary} className={styles.save}>
+                    Save
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

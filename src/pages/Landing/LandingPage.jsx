@@ -43,7 +43,7 @@ const Landingpage = ({handleSignupOrLogin}) => {
           <div className={styles.homeText}>
             <h1 className={styles.logoTitle}>TG</h1>
             <h2 className={styles.logosubheaderTitle}> Travel Gold </h2>
-            <h2 className={styles.subHeaderTitle}>Live out your ideal vacation!</h2>
+           
             <button onClick={handleLoginClick} className={styles.loginBtn}>
               Login
             </button>

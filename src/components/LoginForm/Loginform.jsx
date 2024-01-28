@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import * as authService from '../../services/authService'
 import styles from './LoginForm.module.css'
-``
+import Logo from '../../assets/Logo.png'
+
 const Loginform = (props) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -25,8 +26,15 @@ const Loginform = (props) => {
     }
   };
 
+
+  const handleRefresh = () => {
+    window.location.reload();
+  }
+
+
   return (
     <form autoComplete="off" onSubmit={handleSubmit} className={styles.container}>
+      <img src={Logo} className={styles.Loogo}/>
       <div className={styles.inputContainer}>
         <label htmlFor="email" className={styles.label}>
           Email
@@ -55,12 +63,12 @@ const Loginform = (props) => {
           className={styles.inputField}
         />
       </div>
-      <div>
-      <button className={styles.loginButton}>Log In</button>
-<Link to="/">
-  <button className={styles.cancelButton}>Cancel</button>
-</Link>
-      </div>
+  <div className={styles.buttonContainer}>
+  <button className={styles.loginButton}>Log In</button>
+  <Link to="/">
+    <button className={styles.cancelButton}onClick={handleRefresh}   >Cancel</button>
+  </Link>
+</div>
     </form>
   );
 };

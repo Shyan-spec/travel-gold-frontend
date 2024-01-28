@@ -1,18 +1,30 @@
 /* Style for the search input and button */
 .searchInputField {
-  height: 39px;
-  margin: 10px 0;
+  height: 36px;
+  /* margin: 10px 0; */
   padding: 8px;
-  border-radius: 10px 0px 0px 10px;
+  border-radius: 5px 0px 0px 5px; 
+  /* box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5); */
+  background-color: transparent;
+  border-block-color: transparent;
+  border-color: grey;
+  border-style: solid;
+  border-width: thin;
+  
 }
 
 .searchButton {
-  padding: 20px 12px;
+  padding: 17px 12px;
   max-width: 50%;
-  height: 72%;
+  height: 68%;
   border-radius: 0px 10px 10px 0px;
-  background-color: black;
+  /* box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5); */
   font-size: 1rem;
+  color: gray;
+  border-style: solid;
+    border-width: thin;
+
+ 
 }
 
 .navbar {
@@ -41,6 +53,8 @@
   grid-template-areas:
     "headerContainer"
     "scheduleContainer";
+    
+  
 }
 
 .headerContainer {
@@ -50,12 +64,16 @@
   align-items: center;
   color: white;
   z-index: 1;
+  font-family: "Cormorant Garamond", serif;
 }
 
 .schedule {
   display: flex;
   align-items: center;
   width: 85%;
+  margin-bottom: 0%;
+ 
+
   
 }
 
@@ -65,18 +83,27 @@
     justify-content: center;
     margin-bottom: 15%;
     z-index: 1;
+    
+   
 }
 
 .schedule > * {
-  flex: 1; /* Makes each child flexibly occupy equal space */
+  flex: 1;
+  
+  /* Makes each child flexibly occupy equal space */
 }
 
 .schedule input,
 .schedule button {
-  width: 100%; /* Full width within their flex container */
+  width: 100%; 
+  /* box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5); */
+  /* border-color: black; */
+
 }
 
 .header {
   font-size: 7rem;
   margin-bottom: 0;
+
 }
+
