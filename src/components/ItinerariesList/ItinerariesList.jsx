@@ -8,7 +8,10 @@ const ItineraryList = () => {
   useEffect(() => {
     const fetchItins = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/itineraries')
+        const response = await axios.get(`${import.meta.env.VITE_BACK_END_SERVER_URL}/itineraries`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming a Bearer token, adjust if different
+        }})
         setItneraries(response.data.itineraries)
       } catch (error) {
         console.error('error fetching the itinerary list', error)
