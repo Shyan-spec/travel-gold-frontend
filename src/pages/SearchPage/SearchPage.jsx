@@ -120,7 +120,7 @@ const SearchPage = () => {
           <h1 className={styles.header}> WELCOME BACK!</h1>
           <h1 className={styles.subHeader}>
             {" "}
-            Let's Get You Set Up For Your Next Get Away.
+            {/* Let's Get You Set Up For Your Next Get Away. */}
           </h1>
         </div>
         <div className={styles.scheduleContainer}>
