@@ -16,7 +16,7 @@ export const Navbar = () => {
       </NavLink>
       <ul>
         {/* <li><NavLink to="/signup" className={styles.active}></NavLink></li> */}
-        <li><NavLink to="/search" onClick={handleLogout} className={styles.active}>Create Itinerary</NavLink></li>
+        <li><NavLink to="/search"className={styles.active}>Create Itinerary</NavLink></li>
         <li><NavLink to="/itineraries" className={styles.active}>My Itineraries</NavLink></li>
         <li><NavLink to="/" onClick={handleLogout} className={styles.active}>Logout</NavLink></li>
       

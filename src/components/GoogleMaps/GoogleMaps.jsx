@@ -310,7 +310,7 @@ const GoogleMaps = () => {
                             }}
                           >
                             {" "}
-                            Add To Points Of Intrests
+                            Add To Points Of Interests
                           </button>
                         </div>
                       </InfoWindow>
