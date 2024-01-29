@@ -156,7 +156,7 @@ const GoogleMaps = () => {
   };
 
   const handleSearchSubmit = (e) => {
-    console.log(e);
+
     fetchNearbyPlaces(center.lat, center.lng, searchQuery);
   };
 
@@ -183,7 +183,7 @@ const GoogleMaps = () => {
       if (place.geometry.viewport) {
         map.fitBounds(place.geometry.viewport);
       } else {
-        console.log(place.geometry);
+        
         map.setCenter(center);
         map.setZoom(17);
       }
