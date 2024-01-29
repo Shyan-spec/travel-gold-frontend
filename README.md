@@ -4,11 +4,10 @@
 <img width="267" alt="Screenshot 2024-01-19 at 10 39 23 PM" src="https://github.com/Shyan-spec/travel-gold-frontend/assets/150564873/91cf51f3-e70c-47d9-bbf2-efd4db97ad3f">
 
 
-# Front-end / Back-end Deployment links
+# Front-end 
 
-https://teal-pony-b56b44.netlify.app/
 
-[https://github.com/charlie-bedell/travel-gold-backend](https://travel-gold-backend-2516f34de16d.herokuapp.com/)
+https://peaceful-pasca-8105c8.netlify.app/
 
 
 
@@ -63,18 +62,15 @@ My Itineraries: In "My itineraries" you will be able to view all the itineraries
 | Friday     | - My itineraries page<br> - CSS (Clean up)                         |
 | Saturday/Sunday | - Testing and debugging                                       |
 
-## BACKEND
-
-| Day        | Tasks                                                              |
-|------------|--------------------------------------------------------------------|
-| Monday     | - Authentication in REPO<br> - 50% Authentication set-up          |
-| Tuesday    | - Finish Authentication<br> - 50% Routes done                     |
-| Wednesday  | - 50% Controllers<br> - Deploy<br> - Have all data models done<br> - 50% Routes done |
-| Thursday   | - Finish remaining 50% of Controllers                              |
-| Friday     | - Clean up                                                          |
-| Saturday/Sunday | - Testing and debugging                                       |
 
 
+# WIRE FRAME 
+<img width="1164" alt="Screenshot 2024-01-29 at 10 09 38 AM" src="https://github.com/Shyan-spec/travel-gold-frontend/assets/150564873/a7107093-6528-4e2a-845b-4280be91f040">
+
+<img width="994" alt="Screenshot 2024-01-29 at 10 09 52 AM" src="https://github.com/Shyan-spec/travel-gold-frontend/assets/150564873/d3897684-6e79-4699-8348-09fb1c7e6318">
+<img width="1115" alt="Screenshot 2024-01-29 at 10 10 15 AM" src="https://github.com/Shyan-spec/travel-gold-frontend/assets/150564873/cf0fb135-d744-402b-8f3d-29a9a7bd47d5">
+
+<img width="1162" alt="Screenshot 2024-01-29 at 10 10 33 AM" src="https://github.com/Shyan-spec/travel-gold-frontend/assets/150564873/db132b06-ab9f-453c-92c4-94444345884d">
 
 
 # MVP 
