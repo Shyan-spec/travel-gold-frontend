@@ -87,6 +87,8 @@ const GoogleMaps = () => {
       `${import.meta.env.VITE_BACK_END_SERVER_URL}/itineraries/${itineraryId}`,
       {
         name: itinerary.itineraryName,
+        lat: center.lat,
+        lng: center.lng
       },
       {
         headers: {

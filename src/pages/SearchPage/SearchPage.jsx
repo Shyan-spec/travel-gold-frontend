@@ -41,6 +41,8 @@ const SearchPage = () => {
         locationName: searchResults.place.name,
         startDate: searchResults.startDate.$d,
         endDate: searchResults.endDate.$d,
+        lat: searchResults.place.lat,
+        lng: searchResults.place.lng
       },
       {
         headers: {
@@ -48,9 +50,6 @@ const SearchPage = () => {
         },
       }
     );
-
-    console.log(response.data, localStorage.getItem('token'));
-
     const itineraryId = response.data.itineraryId;
     navigate("/createItinerary", { state: { searchResults, itineraryId } });
   };
