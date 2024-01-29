@@ -33,7 +33,7 @@ const ItineraryList = () => {
       ) : (
         <ul className="itinList">
           {itineraries.map((itinerary) => (
-            console.log(itinerary),
+            
             <li key={itinerary._id}>
               <Link
                 to={{
@@ -41,7 +41,16 @@ const ItineraryList = () => {
                   state: { itinerary },
                 }}
               >
-                {itinerary.name}
+                <h1>
+                  {itinerary.name}
+                </h1>
+                <h2>
+                  {itinerary.locationName}
+                </h2>
+                <p>  
+                  {itinerary.startDate}
+                  {itinerary.endDate}
+                </p>
               </Link>
             </li>
           ))}

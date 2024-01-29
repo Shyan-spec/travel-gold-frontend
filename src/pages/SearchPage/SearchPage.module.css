@@ -1,6 +1,6 @@
 /* Style for the search input and button */
 .searchInputField {
-  height: 36px;
+  height: 41px;
   /* margin: 10px 0; */
   padding: 8px;
   border-radius: 5px 0px 0px 5px; 
@@ -10,11 +10,16 @@
   border-color: white;
   border-style: solid;
   border-width: thin;
+  font-size: large;
   
 }
 
+.searchInputField::placeholder {
+  color: white;
+}
+
 .searchButton {
-  padding: 17px 12px;
+  padding: 20px 12px;
   max-width: 50%;
   height: 68%;
   border-radius: 0px 10px 10px 0px;
