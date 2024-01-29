@@ -120,7 +120,7 @@ const SearchPage = () => {
           <h1 className={styles.header}> WELCOME BACK!</h1>
           <h1 className={styles.subHeader}>
             {" "}
-            {/* Let's Get You Set Up For Your Next Get Away. */}
+             Let's Get You Set Up For Your Next Get Away. 
           </h1>
         </div>
         <div className={styles.scheduleContainer}>
@@ -128,7 +128,7 @@ const SearchPage = () => {
             <input
               type="text"
               name="place"
-              placeholder="Search..."
+              placeholder="Where to?"
               ref={autocompleteInputRef}
               className={styles.searchInputField}
               onChange={() => {
@@ -159,7 +159,27 @@ const SearchPage = () => {
                 onChange={(newValue) =>
                   handleDateChange("startDate", newValue)
                 }
-                className={styles.ehh}
+                sx={{
+                  // Your custom styles here
+                  // Example:
+                  '.MuiInputBase-input': {
+                    color: 'white',
+                    borderWidth: 'thin',
+                    borderColor: 'white',
+                    borderStyle: 'solid'
+
+                    // Add more styles as needed
+                  },
+                  '& .MuiInputBase-root': {
+                    borderWidth: 'thin',
+                    borderColor: 'white',
+                    borderStyle: 'solid'
+
+                  },
+                  '& .MuiSvgIcon-root' : {
+                    color: 'white'
+                  },
+                }}
               />
             </LocalizationProvider>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -169,7 +189,27 @@ const SearchPage = () => {
                 onChange={(newValue) =>
                   handleDateChange("endDate", newValue)
                 }
-                className={styles.ehh}
+                sx={{
+                  // Your custom styles here
+                  // Example:
+                  '.MuiInputBase-input': {
+                    color: 'white',
+                    borderWidth: 'thin',
+                    borderColor: 'white',
+                    borderStyle: 'solid'
+
+                    // Add more styles as needed
+                  },
+                  '& .MuiInputBase-root': {
+                    borderWidth: 'thin',
+                    borderColor: 'white',
+                    borderStyle: 'solid'
+
+                  },
+                  '& .MuiSvgIcon-root' : {
+                    color: 'white'
+                  }
+                }}
               />
             </LocalizationProvider>
             <Link to="/createItinerary">
