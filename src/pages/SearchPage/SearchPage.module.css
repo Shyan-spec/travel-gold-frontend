@@ -11,6 +11,7 @@
   border-style: solid;
   border-width: thin;
   font-size: large;
+  color: white;
   
 }
 
@@ -70,6 +71,8 @@
   color: white;
   z-index: 1;
   font-family: "Cormorant Garamond", serif;
+  position: relative;
+    top: 36%;
 }
 
 .schedule {
@@ -88,7 +91,7 @@
     justify-content: center;
     margin-bottom: 15%;
     z-index: 1;
-    
+    margin-left: 10%;
    
 }
 
@@ -109,6 +112,7 @@
 .header {
   font-size: 7rem;
   margin-bottom: 0;
+  font-size: calc(1rem + 3vw);
 
 }
 
