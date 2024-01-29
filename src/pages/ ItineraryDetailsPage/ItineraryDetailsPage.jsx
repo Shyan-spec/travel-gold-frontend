@@ -12,12 +12,12 @@ import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
+import dayjs from 'dayjs'
 
 const ItineraryDetailsPage = () => {
   const libraries = ["places"];
   const [placesOfInterest, setPlacesOfInterest] = useState([]);
   const autocompleteInputRef = useRef(null);
-
 
   const { itinerary } = useParams();
   const [itineraryDetails, setItineraryDetails] = useState(null);
@@ -25,14 +25,19 @@ const ItineraryDetailsPage = () => {
   useEffect(() => {
     const fetchItinerary = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BACK_END_SERVER_URL}/itineraries/${itinerary}`, {
+        const response = await axios.get(
+          `${
+            import.meta.env.VITE_BACK_END_SERVER_URL
+          }/itineraries/${itinerary}`,
+          {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming a Bearer token, adjust if different
-              },
-        });
+              Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming a Bearer token, adjust if different
+            },
+          }
+        );
         setItineraryDetails(response.data);
       } catch (error) {
-        console.error('Error fetching itinerary:', error);
+        console.error("Error fetching itinerary:", error);
       }
     };
 
@@ -41,8 +46,7 @@ const ItineraryDetailsPage = () => {
     }
   }, [itinerary, itineraryDetails]);
 
-  console.log(itinerary,itineraryDetails)
-
+  console.log(itinerary);
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
@@ -86,7 +90,20 @@ const ItineraryDetailsPage = () => {
     <>
       <Navbar />
       <div className={styles.detailsContainer}>
-        <div className={styles.detailsHeader}></div>
+        <div className={styles.detailsHeader}>
+          <div className={styles.leftColumn}>
+            <h1 className={styles.itineraryName}>{itineraryDetails?.name}</h1>
+            <h2 className={styles.itineraryLocation}>{itineraryDetails?.locationName}</h2>
+          </div>
+          <div className={styles.rightColumn}>
+            <p className={styles.dates}>
+              <span>Start Date: </span> {dayjs(itineraryDetails?.startDate).format('MM-DD-YYYY')}
+            </p>
+            <p className={styles.dates}>
+              <span>Return Date: </span> {dayjs(itineraryDetails?.startDate).format('MM-DD-YYYY')}
+            </p>
+          </div>
+        </div>
         <div className={styles.detailsMap}>
           {isLoaded && (
             <GoogleMap

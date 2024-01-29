@@ -1,24 +1,69 @@
-.detailsContainer {  display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 0.2fr 1.8fr;
-    grid-auto-columns: 1fr;
-    grid-auto-rows: 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "detailsHeader detailsHeader"
-      "detailsMap detailsInfo";
-      height: 92vh;
-  }
-  
-  .detailsMap { 
-    grid-area: detailsMap;
-    display: flex;
-    justify-content: center;
-    align-items: center;
- }
-  
-  .detailsInfo { grid-area: detailsInfo; }
-  
-  .detailsHeader { grid-area: detailsHeader; }
-  
+.detailsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 0.2fr 1.8fr;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "detailsHeader detailsHeader"
+    "detailsMap detailsInfo";
+  height: 92vh;
+  font-family: "Cormorant Garamond", serif;
+}
+
+.detailsMap {
+  grid-area: detailsMap;
+  display: flex;
+  justify-content: center;
+}
+
+.dates {
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto", "Helvetica", "Arial", sans-;
+}
+
+.detailsInfo {
+  grid-area: detailsInfo;
+}
+
+.detailsHeader {
+  display: flex;
+  grid-area: detailsHeader;
+  justify-content: space-between; /* Aligns children to each side */
+  align-items: center; /* Aligns children vertically */
+}
+
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  margin-right: 5%;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
+  justify-content: center;
+}
+
+.itineraryName {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif, bold;
+  margin-bottom: 5%;
+  font-size: 3rem;
+}
+
+.itineraryLocation {
+  margin: 0;
+  font-size: 2rem;
+}
+
+span {
+  font-family: "Cormorant Garamond", serif, bold;
+  font-size: larger;
+}
+
