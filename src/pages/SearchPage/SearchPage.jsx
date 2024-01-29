@@ -34,6 +34,7 @@ const SearchPage = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     setSearchResults({ ...searchResults, [e.target.name]: e.target.value });
+<<<<<<< Updated upstream
 
     const response = await axios.post(
       `${import.meta.env.VITE_BACK_END_SERVER_URL}/itineraries/`,
@@ -46,11 +47,27 @@ const SearchPage = () => {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`, // Assuming a Bearer token, adjust if different
         },
+=======
+    
+    
+    const response = await axios.post(`${import.meta.env.VITE_BACK_END_SERVER_URL}/itineraries/`, {
+      locationName: searchResults.place.name,
+      startDate: searchResults.startDate.$d,
+      endDate: searchResults.endDate.$d,
+      lat: searchResults.place.lat,
+      lng: searchResults.place.lng
+    }, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}` // Assuming a Bearer token, adjust if different
+>>>>>>> Stashed changes
       }
     );
 
+<<<<<<< Updated upstream
     console.log(response.data, localStorage.getItem('token'));
 
+=======
+>>>>>>> Stashed changes
     const itineraryId = response.data.itineraryId;
     navigate("/createItinerary", { state: { searchResults, itineraryId } });
   };
