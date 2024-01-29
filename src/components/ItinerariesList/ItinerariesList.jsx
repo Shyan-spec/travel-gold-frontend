@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import '../ItinerariesList/Itineraries.css'
 
 const ItineraryList = () => {
   const [itineraries, setItneraries] = useState([]);
@@ -48,8 +49,8 @@ const ItineraryList = () => {
                   {itinerary.locationName}
                 </h2>
                 <p>  
-                  {itinerary.startDate}
-                  {itinerary.endDate}
+                {new Date(itinerary.startDate).toLocaleDateString()} -{" "}
+                  {new Date(itinerary.endDate).toLocaleDateString()}
                 </p>
               </Link>
             </li>
