@@ -143,7 +143,7 @@ const GoogleMaps = () => {
   async function fetchNearbyPlaces(lat, lng, query) {
     try {
       const response = await axios.get(
-        `http://localhost:3001/google/api/nearbySearch?lat=${lat}&lng=${lng}&query=${query}`
+        `http://localhost:3000/google/api/nearbySearch?lat=${lat}&lng=${lng}&query=${query}`
       );
       setNearbyPlaces(response.data);
     } catch (error) {
