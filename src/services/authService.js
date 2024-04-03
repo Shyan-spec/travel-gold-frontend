@@ -13,17 +13,23 @@ async function signup(user) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
     });
+
+    if (!res.ok) {
+      // This checks if the response status code is not in the 2xx success range
+      const errorBody = await res.json(); // Assuming the server sends back a JSON with the error message
+      throw new Error(errorBody.err || 'Something went wrong, please try again.');
+    }
+
     const json = await res.json();
     if (json.token) {
       tokenService.setToken(json.token);
       return json.token;
-    }
-    if (json.err) {
-      throw new Error(json.err);
+    } else {
+      throw new Error('No token received, please try again.');
     }
   } catch (err) {
-    console.log(err);
-    throw err;
+    console.error('Signup error:', err.message);
+    throw err; // Or you can handle it differently, maybe return a specific error message
   }
 }
 
